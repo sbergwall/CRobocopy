@@ -6,57 +6,64 @@
     "Parameters": [
         {
             "Name": "Source",
+            "Aliases": ["Path"],
             "OriginalName": "",
             "Mandatory": true,
             "Position": 0,
-            "OriginalPosition": 0,
             "ParameterType" : "string"
         },
         {
             "Name": "Destination",
+            "Aliases": ["Target"],
             "OriginalName": "",
             "Mandatory": true,
             "Position": 1,
-            "OriginalPosition": 1,
             "ParameterType" : "string"
         },
         {
             "Name": "Files",
             "OriginalName": "",
             "DefaultValue": "*.*",
-            "OriginalPosition": 2,
             "Position": 2,
+            "NoGap": true,
             "ParameterType" : "string"
         },
         {
             "Name": "IncludeSubDirectories",
+            "Aliases": ["s"],
+            "ParameterSetName": ["IncludeSubDirectories"],
             "OriginalName": "/s",
             "ParameterType" : "switch"
         },
         {
             "Name": "IncludeEmptySubDirectories",
+            "Aliases": ["e","Recurse"],
+            "ParameterSetName": ["IncludeEmptySubDirectories"],
             "OriginalName": "/e",
             "ParameterType" : "switch"
         },
         {
             "Name": "Level",
+            "Aliases": ["lev","Depth"],
             "OriginalName": "/lev:",
-            "Position": 3,
-            "OriginalPosition": 3,
+            "NoGap": true,
             "ParameterType" : "int"
         },
         {
             "Name": "RestartMode",
+            "Aliases": ["z"],
             "OriginalName": "/z",
             "ParameterType" : "switch"
         },
         {
             "Name": "BackupMode",
+            "Aliases": ["b"],
             "OriginalName": "/b",
             "ParameterType" : "switch"
         },
         {
             "Name": "RestartBackupMode",
+            "Aliases": ["zb"],
             "OriginalName": "/zb",
             "ParameterType" : "switch"
         },
@@ -67,10 +74,10 @@
         },
         {
             "Name": "CopyFlags",
+            "Aliases": ["COPY"],
             "OriginalName": "/COPY:",
-            "OriginalPosition": 4,
-            "Position": 4,
-            "ParameterType" : "string[]",
+            "ParameterType" : "string",
+            "NoGap": true,
             "AdditionalParameterAttributes": [
                 "[ValidateSet('d','a','t','x','s','o','u')]"
             ]
