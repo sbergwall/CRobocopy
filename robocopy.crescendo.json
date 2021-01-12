@@ -1,0 +1,43 @@
+{
+    "$schema": "./Microsoft.PowerShell.Crescendo.Schema.json",
+    "Verb": "Start",
+    "Noun": "Robocopy",
+    "OriginalName": "C:/windows/system32/robocopy.exe",
+    "Parameters": [
+        {
+            "Name": "Source",
+            "OriginalName": "",
+            "Position": 0
+        },
+        {
+            "Name": "Destination",
+            "OriginalName": "",
+            "Position": 1
+        },
+        {
+            "Name": "Files",
+            "OriginalName": "",
+            "Position": 2
+        },
+        {
+            "Name": "IncludeSubDirectories",
+            "OriginalName": "/s",
+            "ParameterType" : "switch"
+        },
+        {
+            "Name": "IncludeEmptySubDirectories",
+            "OriginalName": "/e",
+            "ParameterType" : "switch"
+        },
+        {
+            "Name": "RestartMode",
+            "OriginalName": "/z",
+            "ParameterType" : "switch"
+        },
+        {
+            "Name": "BackupMode",
+            "OriginalName": "/b",
+            "ParameterType" : "switch"
+        }      
+    ]
+}
