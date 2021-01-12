@@ -3,22 +3,30 @@
     "Verb": "Start",
     "Noun": "Robocopy",
     "OriginalName": "C:/windows/system32/robocopy.exe",
+    "Usage": {
+        "Synopsis": "Run Robocopy.exe with native PowerShell Support."
+    },
+    "Description": "See https://technet.microsoft.com/en-us/library/cc733145(v=ws.11).aspx for an extensive documentation on Robocopy switches.",
     "Parameters": [
         {
             "Name": "Source",
-            "Aliases": ["Path"],
+            "Aliases": [
+                "Path"
+            ],
             "OriginalName": "",
             "Mandatory": true,
             "Position": 0,
-            "ParameterType" : "string"
+            "ParameterType": "string"
         },
         {
             "Name": "Destination",
-            "Aliases": ["Target"],
+            "Aliases": [
+                "Target"
+            ],
             "OriginalName": "",
             "Mandatory": true,
             "Position": 1,
-            "ParameterType" : "string"
+            "ParameterType": "string"
         },
         {
             "Name": "Files",
@@ -26,57 +34,77 @@
             "DefaultValue": "*.*",
             "Position": 2,
             "NoGap": true,
-            "ParameterType" : "string"
+            "ParameterType": "string"
         },
         {
             "Name": "IncludeSubDirectories",
-            "Aliases": ["s"],
-            "ParameterSetName": ["IncludeSubDirectories"],
+            "Aliases": [
+                "s"
+            ],
+            "ParameterSetName": [
+                "IncludeSubDirectories"
+            ],
             "OriginalName": "/s",
-            "ParameterType" : "switch"
+            "ParameterType": "switch"
         },
         {
             "Name": "IncludeEmptySubDirectories",
-            "Aliases": ["e","Recurse"],
-            "ParameterSetName": ["IncludeEmptySubDirectories"],
+            "Aliases": [
+                "e",
+                "Recurse"
+            ],
+            "ParameterSetName": [
+                "IncludeEmptySubDirectories"
+            ],
             "OriginalName": "/e",
-            "ParameterType" : "switch"
+            "ParameterType": "switch"
         },
         {
             "Name": "Level",
-            "Aliases": ["lev","Depth"],
+            "Aliases": [
+                "lev",
+                "Depth"
+            ],
             "OriginalName": "/lev:",
             "NoGap": true,
-            "ParameterType" : "int"
+            "ParameterType": "int"
         },
         {
             "Name": "RestartMode",
-            "Aliases": ["z"],
+            "Aliases": [
+                "z"
+            ],
             "OriginalName": "/z",
-            "ParameterType" : "switch"
+            "ParameterType": "switch"
         },
         {
             "Name": "BackupMode",
-            "Aliases": ["b"],
+            "Aliases": [
+                "b"
+            ],
             "OriginalName": "/b",
-            "ParameterType" : "switch"
+            "ParameterType": "switch"
         },
         {
             "Name": "RestartBackupMode",
-            "Aliases": ["zb"],
+            "Aliases": [
+                "zb"
+            ],
             "OriginalName": "/zb",
-            "ParameterType" : "switch"
+            "ParameterType": "switch"
         },
         {
             "Name": "EFSRAW",
             "OriginalName": "/EFSRAW",
-            "ParameterType" : "switch"
+            "ParameterType": "switch"
         },
         {
             "Name": "CopyFlags",
-            "Aliases": ["COPY"],
+            "Aliases": [
+                "COPY"
+            ],
             "OriginalName": "/COPY:",
-            "ParameterType" : "string",
+            "ParameterType": "string",
             "NoGap": true,
             "AdditionalParameterAttributes": [
                 "[ValidateSet('d','a','t','x','s','o','u')]"
@@ -85,17 +113,17 @@
         {
             "Name": "SEC",
             "OriginalName": "/SEC",
-            "ParameterType" : "switch"
+            "ParameterType": "switch"
         },
         {
             "Name": "COPYALL",
             "OriginalName": "/COPYALL",
-            "ParameterType" : "switch"
+            "ParameterType": "switch"
         },
         {
             "Name": "NoCopy",
             "OriginalName": "/NOCOPY",
-            "ParameterType" : "switch"
+            "ParameterType": "switch"
         }
     ]
 }
