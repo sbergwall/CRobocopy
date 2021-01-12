@@ -4,20 +4,35 @@ Function Start-Robocopy
 [CmdletBinding()]
 
 param(
-[Parameter(Position=0)]
+[Parameter(Position=0,Mandatory=$true)]
 [object]$Source,
-[Parameter(Position=1)]
+[Parameter(Position=1,Mandatory=$true)]
 [object]$Destination,
-[Parameter(Position=2)]
-[object]$Files,
+[Parameter(Position=2,Mandatory=$true)]
+[object]$Files = "*",
 [Parameter()]
 [switch]$IncludeSubDirectories,
 [Parameter()]
 [switch]$IncludeEmptySubDirectories,
 [Parameter()]
+[string]$Level,
+[Parameter()]
 [switch]$RestartMode,
 [Parameter()]
-[switch]$BackupMode
+[switch]$BackupMode,
+[Parameter()]
+[switch]$RestartBackupMode,
+[Parameter()]
+[switch]$EFSRAW,
+[ValidateSet('d','a','t','x','s','o','u')]
+[Parameter()]
+[string]$CopyFlags,
+[Parameter()]
+[switch]$SEC,
+[Parameter()]
+[switch]$COPYALL,
+[Parameter()]
+[switch]$NoCopy
     )
 
 BEGIN {
@@ -27,8 +42,15 @@ BEGIN {
         Files = @{ OriginalName = ''; OriginalPosition = '0'; Position = '2'; ParameterType = [object]; NoGap = $False }
         IncludeSubDirectories = @{ OriginalName = '/s'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         IncludeEmptySubDirectories = @{ OriginalName = '/e'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        Level = @{ OriginalName = '/lev:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $False }
         RestartMode = @{ OriginalName = '/z'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         BackupMode = @{ OriginalName = '/b'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        RestartBackupMode = @{ OriginalName = '/zb'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        EFSRAW = @{ OriginalName = '/EFSRAW'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        CopyFlags = @{ OriginalName = '/COPY:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $False }
+        SEC = @{ OriginalName = '/SEC'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        COPYALL = @{ OriginalName = '/COPYALL'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        NoCopy = @{ OriginalName = '/NOCOPY'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
     }
 
     $__outputHandlers = @{ Default = @{ StreamOutput = $true; Handler = { $input } } }
@@ -76,7 +98,7 @@ PROCESS {
    ROBOCOPY     ::     Robust File Copy for Windows                              
 -------------------------------------------------------------------------------
 
-  Started : Tuesday, 12 January 2021 19:24:19
+  Started : Tuesday, 12 January 2021 20:04:10
               Usage :: ROBOCOPY source destination [file [file]...] [options]
 
              source :: Source Directory (drive:\path or \\server\share\path).
@@ -286,11 +308,39 @@ PROCESS {
 
 
 
+.PARAMETER Level
+
+
+
 .PARAMETER RestartMode
 
 
 
 .PARAMETER BackupMode
+
+
+
+.PARAMETER RestartBackupMode
+
+
+
+.PARAMETER EFSRAW
+
+
+
+.PARAMETER CopyFlags
+
+
+
+.PARAMETER SEC
+
+
+
+.PARAMETER COPYALL
+
+
+
+.PARAMETER NoCopy
 
 
 

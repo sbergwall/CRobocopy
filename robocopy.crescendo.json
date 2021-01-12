@@ -7,16 +7,20 @@
         {
             "Name": "Source",
             "OriginalName": "",
+            "Mandatory": true,
             "Position": 0
         },
         {
             "Name": "Destination",
             "OriginalName": "",
+            "Mandatory": true,
             "Position": 1
         },
         {
             "Name": "Files",
             "OriginalName": "",
+            "DefaultValue": "*",
+            "Mandatory": true,
             "Position": 2
         },
         {
@@ -30,6 +34,11 @@
             "ParameterType" : "switch"
         },
         {
+            "Name": "Level",
+            "OriginalName": "/lev:",
+            "ParameterType" : "string"
+        },
+        {
             "Name": "RestartMode",
             "OriginalName": "/z",
             "ParameterType" : "switch"
@@ -38,6 +47,39 @@
             "Name": "BackupMode",
             "OriginalName": "/b",
             "ParameterType" : "switch"
-        }      
+        },
+        {
+            "Name": "RestartBackupMode",
+            "OriginalName": "/zb",
+            "ParameterType" : "switch"
+        },
+        {
+            "Name": "EFSRAW",
+            "OriginalName": "/EFSRAW",
+            "ParameterType" : "switch"
+        },
+        {
+            "Name": "CopyFlags",
+            "OriginalName": "/COPY:",
+            "ParameterType" : "string",
+            "AdditionalParameterAttributes": [
+                "[ValidateSet('d','a','t','x','s','o','u')]"
+            ]
+        },
+        {
+            "Name": "SEC",
+            "OriginalName": "/SEC",
+            "ParameterType" : "switch"
+        },
+        {
+            "Name": "COPYALL",
+            "OriginalName": "/COPYALL",
+            "ParameterType" : "switch"
+        },
+        {
+            "Name": "NoCopy",
+            "OriginalName": "/NOCOPY",
+            "ParameterType" : "switch"
+        }
     ]
 }
