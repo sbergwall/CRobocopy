@@ -5,17 +5,17 @@ Function Start-Robocopy
 
 param(
 [Parameter(Position=0,Mandatory=$true)]
-[object]$Source,
+[string]$Source,
 [Parameter(Position=1,Mandatory=$true)]
-[object]$Destination,
-[Parameter(Position=2,Mandatory=$true)]
-[object]$Files = "*",
+[string]$Destination,
+[Parameter(Position=2)]
+[string]$Files = "*.*",
 [Parameter()]
 [switch]$IncludeSubDirectories,
 [Parameter()]
 [switch]$IncludeEmptySubDirectories,
 [Parameter()]
-[string]$Level,
+[int]$Level,
 [Parameter()]
 [switch]$RestartMode,
 [Parameter()]
@@ -37,12 +37,12 @@ param(
 
 BEGIN {
     $__PARAMETERMAP = @{
-        Source = @{ OriginalName = ''; OriginalPosition = '0'; Position = '0'; ParameterType = [object]; NoGap = $False }
-        Destination = @{ OriginalName = ''; OriginalPosition = '0'; Position = '1'; ParameterType = [object]; NoGap = $False }
-        Files = @{ OriginalName = ''; OriginalPosition = '0'; Position = '2'; ParameterType = [object]; NoGap = $False }
+        Source = @{ OriginalName = ''; OriginalPosition = '0'; Position = '0'; ParameterType = [string]; NoGap = $False }
+        Destination = @{ OriginalName = ''; OriginalPosition = '0'; Position = '1'; ParameterType = [string]; NoGap = $False }
+        Files = @{ OriginalName = ''; OriginalPosition = '0'; Position = '2'; ParameterType = [string]; NoGap = $False }
         IncludeSubDirectories = @{ OriginalName = '/s'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         IncludeEmptySubDirectories = @{ OriginalName = '/e'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
-        Level = @{ OriginalName = '/lev:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $False }
+        Level = @{ OriginalName = '/lev:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [int]; NoGap = $False }
         RestartMode = @{ OriginalName = '/z'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         BackupMode = @{ OriginalName = '/b'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         RestartBackupMode = @{ OriginalName = '/zb'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
@@ -98,7 +98,7 @@ PROCESS {
    ROBOCOPY     ::     Robust File Copy for Windows                              
 -------------------------------------------------------------------------------
 
-  Started : Tuesday, 12 January 2021 20:04:10
+  Started : Tuesday, 12 January 2021 20:07:35
               Usage :: ROBOCOPY source destination [file [file]...] [options]
 
              source :: Source Directory (drive:\path or \\server\share\path).

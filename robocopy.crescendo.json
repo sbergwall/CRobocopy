@@ -8,20 +8,22 @@
             "Name": "Source",
             "OriginalName": "",
             "Mandatory": true,
-            "Position": 0
+            "Position": 0,
+            "ParameterType" : "string"
         },
         {
             "Name": "Destination",
             "OriginalName": "",
             "Mandatory": true,
-            "Position": 1
+            "Position": 1,
+            "ParameterType" : "string"
         },
         {
             "Name": "Files",
             "OriginalName": "",
-            "DefaultValue": "*",
-            "Mandatory": true,
-            "Position": 2
+            "DefaultValue": "*.*",
+            "Position": 2,
+            "ParameterType" : "string"
         },
         {
             "Name": "IncludeSubDirectories",
@@ -36,7 +38,7 @@
         {
             "Name": "Level",
             "OriginalName": "/lev:",
-            "ParameterType" : "string"
+            "ParameterType" : "int"
         },
         {
             "Name": "RestartMode",
