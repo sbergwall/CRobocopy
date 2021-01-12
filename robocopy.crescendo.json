@@ -9,6 +9,7 @@
             "OriginalName": "",
             "Mandatory": true,
             "Position": 0,
+            "OriginalPosition": 0,
             "ParameterType" : "string"
         },
         {
@@ -16,12 +17,14 @@
             "OriginalName": "",
             "Mandatory": true,
             "Position": 1,
+            "OriginalPosition": 1,
             "ParameterType" : "string"
         },
         {
             "Name": "Files",
             "OriginalName": "",
             "DefaultValue": "*.*",
+            "OriginalPosition": 2,
             "Position": 2,
             "ParameterType" : "string"
         },
@@ -38,6 +41,8 @@
         {
             "Name": "Level",
             "OriginalName": "/lev:",
+            "Position": 3,
+            "OriginalPosition": 3,
             "ParameterType" : "int"
         },
         {
@@ -63,7 +68,9 @@
         {
             "Name": "CopyFlags",
             "OriginalName": "/COPY:",
-            "ParameterType" : "string",
+            "OriginalPosition": 4,
+            "Position": 4,
+            "ParameterType" : "string[]",
             "AdditionalParameterAttributes": [
                 "[ValidateSet('d','a','t','x','s','o','u')]"
             ]
