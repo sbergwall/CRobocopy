@@ -30,18 +30,43 @@ param(
 [Alias('zb')]
 [Parameter()]
 [switch]$RestartBackupMode,
+[Alias('j')]
+[Parameter()]
+[switch]$UnbufferedIOMode,
 [Parameter()]
 [switch]$EFSRAW,
 [ValidateSet('d','a','t','x','s','o','u')]
 [Alias('COPY')]
 [Parameter()]
 [string]$CopyFlags,
+[ValidateSet('d','a','t')]
+[Alias('DCOPY')]
+[Parameter()]
+[string]$DCopyFlags,
 [Parameter()]
 [switch]$SEC,
 [Parameter()]
 [switch]$COPYALL,
 [Parameter()]
-[switch]$NoCopy
+[switch]$NoCopy,
+[Parameter()]
+[switch]$SecFix,
+[Parameter()]
+[switch]$TimFix,
+[Parameter()]
+[switch]$Purge,
+[Parameter()]
+[switch]$Mirror,
+[Parameter()]
+[switch]$Mov,
+[Parameter()]
+[switch]$Move,
+[ValidateSet('R','A','S','H','C','N','E','T')]
+[Parameter()]
+[string]$AddAttribute,
+[ValidateSet('R','A','S','H','C','N','E','T')]
+[Parameter()]
+[string]$RemoveAttribute
     )
 
 BEGIN {
@@ -55,11 +80,21 @@ BEGIN {
         RestartMode = @{ OriginalName = '/z'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         BackupMode = @{ OriginalName = '/b'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         RestartBackupMode = @{ OriginalName = '/zb'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        UnbufferedIOMode = @{ OriginalName = '/j'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         EFSRAW = @{ OriginalName = '/EFSRAW'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         CopyFlags = @{ OriginalName = '/COPY:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
+        DCopyFlags = @{ OriginalName = '/DCOPY:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
         SEC = @{ OriginalName = '/SEC'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         COPYALL = @{ OriginalName = '/COPYALL'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         NoCopy = @{ OriginalName = '/NOCOPY'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        SecFix = @{ OriginalName = '/secfix'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        TimFix = @{ OriginalName = '/timfix'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        Purge = @{ OriginalName = '/purge'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        Mirror = @{ OriginalName = '/mir'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        Mov = @{ OriginalName = '/mov'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        Move = @{ OriginalName = '/move'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        AddAttribute = @{ OriginalName = '/a+'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $False }
+        RemoveAttribute = @{ OriginalName = '/a-:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $False }
     }
 
     $__outputHandlers = @{ Default = @{ StreamOutput = $true; Handler = { $input } } }
@@ -108,59 +143,99 @@ Run Robocopy.exe with native PowerShell Support.
 See https://technet.microsoft.com/en-us/library/cc733145(v=ws.11).aspx for an extensive documentation on Robocopy switches.
 
 .PARAMETER Source
-
+Source Directory (drive:\path or \\server\share\path).
 
 
 .PARAMETER Destination
-
+Destination Dir (drive:\path or \\server\share\path).
 
 
 .PARAMETER Files
-
+File(s) to copy  (names/wildcards: default is '*.*'').
 
 
 .PARAMETER IncludeSubDirectories
-
+copy Subdirectories, but not empty ones.
 
 
 .PARAMETER IncludeEmptySubDirectories
-
+copy subdirectories, including Empty ones.
 
 
 .PARAMETER Level
-
+only copy the top n LEVels of the source directory tree.
 
 
 .PARAMETER RestartMode
-
+copy files in restartable mode.
 
 
 .PARAMETER BackupMode
-
+copy files in Backup mode.
 
 
 .PARAMETER RestartBackupMode
+use restartable mode; if access denied use Backup mode.
 
+
+.PARAMETER UnbufferedIOMode
+copy using unbuffered I/O (recommended for large files).
 
 
 .PARAMETER EFSRAW
-
+copy all encrypted files in EFS RAW mode.
 
 
 .PARAMETER CopyFlags
+What to COPY for files (default is /COPY:DAT). (copyflags : D=Data, A=Attributes, T=Timestamps, X=Skip alt data streams). (S=Security=NTFS ACLs, O=Owner info, U=aUditing info).
 
+
+.PARAMETER DCopyFlags
+What to COPY for files (default is /COPY:DA). (copyflags : D=Data, A=Attributes, T=Timestamps).
 
 
 .PARAMETER SEC
-
+copy files with SECurity (equivalent to /COPY:DATS).
 
 
 .PARAMETER COPYALL
-
+COPY ALL file info (equivalent to /COPY:DATSOU).
 
 
 .PARAMETER NoCopy
+COPY NO file info (useful with /PURGE).
 
+
+.PARAMETER SecFix
+FIX file SECurity on all files, even skipped files.
+
+
+.PARAMETER TimFix
+FIX file TIMes on all files, even skipped files.
+
+
+.PARAMETER Purge
+delete dest files/dirs that no longer exist in source.
+
+
+.PARAMETER Mirror
+MIRror a directory tree (equivalent to /E plus /PURGE).
+
+
+.PARAMETER Mov
+MOVe files (delete from source after copying).
+
+
+.PARAMETER Move
+MOVE files AND dirs (delete from source after copying).
+
+
+.PARAMETER AddAttribute
+Add the given Attributes to copied files. R = Read only, A = Archive, S = System, H = Hidden, C = Compressed, N = Not content indexed,E = Encrypted, T = Temporary
+
+
+.PARAMETER RemoveAttribute
+Remove the given Attributes from copied files. R = Read only, A = Archive, S = System, H = Hidden, C = Compressed, N = Not content indexed,E = Encrypted, T = Temporary
 
 
 
