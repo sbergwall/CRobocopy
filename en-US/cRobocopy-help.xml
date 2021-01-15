@@ -10,7 +10,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>See https://technet.microsoft.com/en-us/library/cc733145(v=ws.11).aspx for an extensive documentation on Robocopy switches.</maml:para>
+      <maml:para>Robocopy.exe with Powershell</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -848,6 +848,11 @@
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>https://technet.microsoft.com/en-us/library/cc733145(v=ws.11).aspx</maml:linkText>
+        <maml:uri>https://technet.microsoft.com/en-us/library/cc733145(v=ws.11).aspx</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
 </helpItems>

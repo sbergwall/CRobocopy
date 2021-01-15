@@ -3,13 +3,13 @@
     "Verb": "Start",
     "Noun": "Robocopy",
     "OriginalName": "C:/windows/system32/robocopy.exe",
+    "Description": "Robocopy.exe with Powershell",
     "Usage": {
         "Synopsis": "Run Robocopy.exe with native PowerShell Support."
     },
     "HelpLinks": [
         "https://technet.microsoft.com/en-us/library/cc733145(v=ws.11).aspx"
     ],
-    "Description": "",
     "Examples" : [
         {
            "Command" : "PS C:\\> Start-Robocopy -Source C:\\tmp\\from -Destination C:\\tmp\\to ",
