@@ -8,6 +8,8 @@ PARAM (
 
 Set-BuildEnvironment -Force
 
+task . ExportCrescendoModule,Test,UpdateHelp
+
 task ExportCrescendoModule {
     Export-CrescendoModule -ConfigurationFile $env:BHPSModulePath\crobocopy.crescendo.json -ModuleName cRobocopy.psm1 -Force
 }
@@ -25,7 +27,7 @@ task UpdateHelp {
     New-ExternalHelp -Path $env:BHPSModulePath\docs -OutputPath $env:BHPSModulePath\en-US -Force
 }
 
-<#
+
 Task UpdateModuleVersion {
 
     [version]$version = Get-Metadata -Path $env:BHPSModuleManifest -PropertyName 'ModuleVersion'
@@ -38,4 +40,3 @@ Task UpdateModuleVersion {
     ForEach-Object { $_.TrimEnd() } |
     Set-Content -Path $env:BHPSModuleManifest -Encoding UTF8
 }
-#>
