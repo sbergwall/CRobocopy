@@ -33,12 +33,13 @@ See https://technet.microsoft.com/en-us/library/cc733145(v=ws.11).aspx for an ex
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+PS C:\> Start-Robocopy -Source C:\tmp\from -Destination C:\tmp\to
 ```
 
-{{ Add example description here }}
+Run Robocopy.exe with source 'C:\tmp\from' to destination 'C:\tmp\to'
+Original Command: robocopy.exe 'C:\tmp\from' 'C:\tmp\to'
 
 ## PARAMETERS
 

@@ -239,6 +239,13 @@ Remove the given Attributes from copied files. R = Read only, A = Archive, S = S
 
 
 
+.EXAMPLE
+PS> PS C:\> Start-Robocopy -Source C:\tmp\from -Destination C:\tmp\to 
+
+Run Robocopy.exe with source 'C:\tmp\from' to destination 'C:\tmp\to'
+Original Command: robocopy.exe 'C:\tmp\from' 'C:\tmp\to'
+
+
 #>
 }
 
