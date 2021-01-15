@@ -38,9 +38,7 @@ See https://technet.microsoft.com/en-us/library/cc733145(v=ws.11).aspx for an ex
 PS C:\> Start-Robocopy -Source C:\tmp\from -Destination C:\tmp\to
 ```
 
-Run Robocopy.exe with source 'C:\tmp\from' to destination 'C:\tmp\to'
-
-Original Command: robocopy.exe 'C:\tmp\from' 'C:\tmp\to'
+Run Robocopy.exe with source 'C:\tmp\from' to destination 'C:\tmp\to' Original Command: robocopy.exe 'C:\tmp\from' 'C:\tmp\to'
 
 ## PARAMETERS
 
@@ -75,7 +73,8 @@ Accept wildcard characters: False
 ```
 
 ### -Files
-File(s) to copy  (names/wildcards: default is '*.*'').
+File(s) to copy  (names/wildcards: default is ' .
+'').
 
 ```yaml
 Type: String

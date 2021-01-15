@@ -6,7 +6,10 @@
     "Usage": {
         "Synopsis": "Run Robocopy.exe with native PowerShell Support."
     },
-    "Description": "See https://technet.microsoft.com/en-us/library/cc733145(v=ws.11).aspx for an extensive documentation on Robocopy switches.",
+    "HelpLinks": [
+        "https://technet.microsoft.com/en-us/library/cc733145(v=ws.11).aspx"
+    ],
+    "Description": "",
     "Examples" : [
         {
            "Command" : "PS C:\\> Start-Robocopy -Source C:\\tmp\\from -Destination C:\\tmp\\to ",
