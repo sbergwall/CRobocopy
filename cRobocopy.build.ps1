@@ -3,7 +3,8 @@
 	Build script (https://github.com/nightroman/Invoke-Build)
 #>
 PARAM (
-    $VersionType = 'Patch'
+    $VersionType = 'Patch',
+    $m
 )
 
 Set-BuildEnvironment -Force
@@ -39,4 +40,10 @@ Task UpdateModuleVersion {
     (Get-Content -Path $env:BHPSModuleManifest -Raw -Encoding UTF8) |
     ForEach-Object { $_.TrimEnd() } |
     Set-Content -Path $env:BHPSModuleManifest -Encoding UTF8
+}
+
+Task push {
+    git add .
+    git commit -a -m $m
+    git push
 }
