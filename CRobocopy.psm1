@@ -196,7 +196,7 @@ BEGIN {
     $__PARAMETERMAP = @{
         Source = @{ OriginalName = ''; OriginalPosition = '0'; Position = '0'; ParameterType = [string]; NoGap = $False }
         Destination = @{ OriginalName = ''; OriginalPosition = '0'; Position = '1'; ParameterType = [string]; NoGap = $False }
-        Files = @{ OriginalName = ''; OriginalPosition = '0'; Position = '2'; ParameterType = [string]; NoGap = $True }
+        Files = @{ OriginalName = ''; OriginalPosition = '0'; Position = '2'; ParameterType = [string]; NoGap = $False }
         IncludeSubDirectories = @{ OriginalName = '/s'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         IncludeEmptySubDirectories = @{ OriginalName = '/e'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         Level = @{ OriginalName = '/lev:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [int]; NoGap = $True }
@@ -315,7 +315,7 @@ Destination Dir (drive:\path or \\server\share\path).
 
 
 .PARAMETER Files
-File(s) to copy  (names/wildcards: default is '*.*'').
+File(s) to copy  (names/wildcards: default is '"\*.\*"').
 
 
 .PARAMETER IncludeSubDirectories

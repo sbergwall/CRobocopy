@@ -41,8 +41,8 @@
       "OriginalName": "",
       "DefaultValue": "*.*",
       "Position": 2,
-      "NoGap": true,
-      "Description": "File(s) to copy  (names/wildcards: default is '*.*'').",
+      "NoGap": false,
+      "Description": "File(s) to copy  (names/wildcards: default is '\"\\*.\\*\"').",
       "ParameterType": "string"
     },
     {
