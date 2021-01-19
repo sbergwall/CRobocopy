@@ -50,6 +50,7 @@
       "Aliases": ["s"],
       "ParameterSetName": ["IncludeSubDirectories"],
       "OriginalName": "/s",
+      "Mandatory": false,
       "Description": "copy Subdirectories, but not empty ones.",
       "ParameterType": "switch"
     },
@@ -58,6 +59,7 @@
       "Aliases": ["e", "Recurse"],
       "ParameterSetName": ["IncludeEmptySubDirectories"],
       "OriginalName": "/e",
+      "Mandatory": false,
       "Description": "copy subdirectories, including Empty ones.",
       "ParameterType": "switch"
     },
@@ -525,8 +527,10 @@
       "OriginalName": "/LFSM:",
       "Description": "Using /LFSM requests robocopy to operate in 'low free space mode'. In that mode, robocopy will pause whenever a file copy would cause the destination volume's free space to go below a 'floor' value, specifying the floor size in n [K:kilo,M:mega,G:giga] bytes. Low free space mode is incompatible with /MT, /EFSRAW, /B, and /ZB.",
       "ParameterType": "string",
-      "AdditionalParameterAttributes": ["[ValidateSet('K','M','G')]"],
-      "nogap": true
+      "NoGap": true,
+      "AdditionalParameterAttributes": [
+        "[ValidatePattern('\\d+G|\\d+M|\\d+K')]"
+      ]
     }
   ]
 }

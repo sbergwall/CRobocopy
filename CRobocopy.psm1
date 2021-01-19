@@ -186,7 +186,7 @@ param(
 [Alias('LFSM')]
 [Parameter(ParameterSetName='LowFreeSpaceMode')]
 [switch]$LowFreeSpaceMode,
-[ValidateSet('K','M','G')]
+[ValidatePattern('\d+G|\d+M|\d+K')]
 [Alias('LFSMFloorSize')]
 [Parameter(ParameterSetName='LowFreeSpaceModeFloorSize')]
 [string]$LowFreeSpaceModeFloorSize
@@ -258,7 +258,7 @@ BEGIN {
         WaitForShareName  = @{ OriginalName = '/tbd'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         List  = @{ OriginalName = '/l'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         LowFreeSpaceMode = @{ OriginalName = '/LFSM'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
-        LowFreeSpaceModeFloorSize = @{ OriginalName = '/LFSM:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $False }
+        LowFreeSpaceModeFloorSize = @{ OriginalName = '/LFSM:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
     }
 
     $__outputHandlers = @{ Default = @{ StreamOutput = $true; Handler = { $input } } }
