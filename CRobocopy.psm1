@@ -315,7 +315,7 @@ Destination Dir (drive:\path or \\server\share\path).
 
 
 .PARAMETER Files
-File(s) to copy  (names/wildcards: default is '"\*.\*"').
+File(s) to copy  (names/wildcards: default is "\*.\*").
 
 
 .PARAMETER IncludeSubDirectories

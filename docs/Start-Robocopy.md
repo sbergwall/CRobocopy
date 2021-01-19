@@ -126,7 +126,7 @@ Accept wildcard characters: False
 ```
 
 ### -Files
-File(s) to copy  (names/wildcards: default is '"\*.\*"').
+File(s) to copy  (names/wildcards: default is "\*.\*").
 
 ```yaml
 Type: String
