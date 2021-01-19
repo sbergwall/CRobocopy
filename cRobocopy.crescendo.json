@@ -1,230 +1,534 @@
 {
-    "$schema": "./Microsoft.PowerShell.Crescendo.Schema.json",
-    "Verb": "Start",
-    "Noun": "Robocopy",
-    "OriginalName": "C:/windows/system32/robocopy.exe",
-    "Description": "Robocopy.exe with Powershell",
-    "Usage": {
-        "Synopsis": "Run Robocopy.exe with native PowerShell Support."
+  "$schema": "./Microsoft.PowerShell.Crescendo.Schema.json",
+  "Verb": "Start",
+  "Noun": "Robocopy",
+  "OriginalName": "C:/windows/system32/robocopy.exe",
+  "Description": "Robocopy.exe with Powershell",
+  "Usage": {
+    "Synopsis": "Run Robocopy.exe with native PowerShell Support."
+  },
+  "HelpLinks": [
+    "https://technet.microsoft.com/en-us/library/cc733145(v=ws.11).aspx"
+  ],
+  "Examples": [
+    {
+      "Command": "PS C:\\> Start-Robocopy -Source C:\\tmp\\from -Destination C:\\tmp\\to ",
+      "OriginalCommand": "robocopy.exe 'C:\\tmp\\from' 'C:\\tmp\\to'",
+      "Description": "Run Robocopy.exe with source 'C:\\tmp\\from' to destination 'C:\\tmp\\to'"
+    }
+  ],
+  "Parameters": [
+    {
+      "Name": "Source",
+      "Aliases": ["Path"],
+      "OriginalName": "",
+      "Mandatory": true,
+      "Position": 0,
+      "Description": "Source Directory (drive:\\path or \\\\server\\share\\path).",
+      "ParameterType": "string"
     },
-    "HelpLinks": [
-        "https://technet.microsoft.com/en-us/library/cc733145(v=ws.11).aspx"
-    ],
-    "Examples" : [
-        {
-           "Command" : "PS C:\\> Start-Robocopy -Source C:\\tmp\\from -Destination C:\\tmp\\to ",
-           "OriginalCommand": "robocopy.exe 'C:\\tmp\\from' 'C:\\tmp\\to'",
-           "Description": "Run Robocopy.exe with source 'C:\\tmp\\from' to destination 'C:\\tmp\\to'"
-        }
-    ],
-    "Parameters": [
-        {
-            "Name": "Source",
-            "Aliases": [
-                "Path"
-            ],
-            "OriginalName": "",
-            "Mandatory": true,
-            "Position": 0,
-            "Description": "Source Directory (drive:\\path or \\\\server\\share\\path).",
-            "ParameterType": "string"
-        },
-        {
-            "Name": "Destination",
-            "Aliases": [
-                "Target"
-            ],
-            "OriginalName": "",
-            "Mandatory": true,
-            "Position": 1,
-            "Description": "Destination Dir (drive:\\path or \\\\server\\share\\path).",
-            "ParameterType": "string"
-        },
-        {
-            "Name": "Files",
-            "OriginalName": "",
-            "DefaultValue": "*.*",
-            "Position": 2,
-            "NoGap": true,
-            "Description": "File(s) to copy  (names/wildcards: default is '*.*'').",
-            "ParameterType": "string"
-        },
-        {
-            "Name": "IncludeSubDirectories",
-            "Aliases": [
-                "s"
-            ],
-            "ParameterSetName": [
-                "IncludeSubDirectories"
-            ],
-            "OriginalName": "/s",
-            "Description": "copy Subdirectories, but not empty ones.",
-            "ParameterType": "switch"
-        },
-        {
-            "Name": "IncludeEmptySubDirectories",
-            "Aliases": [
-                "e",
-                "Recurse"
-            ],
-            "ParameterSetName": [
-                "IncludeEmptySubDirectories"
-            ],
-            "OriginalName": "/e",
-            "Description": "copy subdirectories, including Empty ones.",
-            "ParameterType": "switch"
-        },
-        {
-            "Name": "Level",
-            "Aliases": [
-                "lev",
-                "Depth"
-            ],
-            "OriginalName": "/lev:",
-            "NoGap": true,
-            "Description": "only copy the top n LEVels of the source directory tree.",
-            "ParameterType": "int"
-        },
-        {
-            "Name": "RestartMode",
-            "Aliases": [
-                "z"
-            ],
-            "OriginalName": "/z",
-            "Description": "copy files in restartable mode.",
-            "ParameterType": "switch"
-        },
-        {
-            "Name": "BackupMode",
-            "Aliases": [
-                "b"
-            ],
-            "OriginalName": "/b",
-            "Description": "copy files in Backup mode.",
-            "ParameterType": "switch"
-        },
-        {
-            "Name": "RestartBackupMode",
-            "Aliases": [
-                "zb"
-            ],
-            "OriginalName": "/zb",
-            "Description": "use restartable mode; if access denied use Backup mode.",
-            "ParameterType": "switch"
-        },
-        {
-            "Name": "UnbufferedIOMode",
-            "Aliases": [
-                "j"
-            ],
-            "OriginalName": "/j",
-            "Description": "copy using unbuffered I/O (recommended for large files).",
-            "ParameterType": "switch"
-        },
-        {
-            "Name": "EFSRAW",
-            "OriginalName": "/EFSRAW",
-            "Description": "copy all encrypted files in EFS RAW mode.",
-            "ParameterType": "switch"
-        },
-        {
-            "Name": "CopyFlags",
-            "Aliases": [
-                "COPY"
-            ],
-            "OriginalName": "/COPY:",
-            "Description": "What to COPY for files (default is /COPY:DAT). (copyflags : D=Data, A=Attributes, T=Timestamps, X=Skip alt data streams). (S=Security=NTFS ACLs, O=Owner info, U=aUditing info).",
-            "ParameterType": "string",
-            "NoGap": true,
-            "AdditionalParameterAttributes": [
-                "[ValidateSet('d','a','t','x','s','o','u')]"
-            ]
-        },
-        {
-            "Name": "DCopyFlags",
-            "Aliases": [
-                "DCOPY"
-            ],
-            "OriginalName": "/DCOPY:",
-            "Description": "What to COPY for files (default is /COPY:DA). (copyflags : D=Data, A=Attributes, T=Timestamps).",
-            "ParameterType": "string",
-            "NoGap": true,
-            "AdditionalParameterAttributes": [
-                "[ValidateSet('d','a','t')]"
-            ]
-        },
-        {
-            "Name": "SEC",
-            "OriginalName": "/SEC",
-            "Description": "copy files with SECurity (equivalent to /COPY:DATS).",
-            "ParameterType": "switch"
-        },
-        {
-            "Name": "COPYALL",
-            "OriginalName": "/COPYALL",
-            "Description": "COPY ALL file info (equivalent to /COPY:DATSOU).",
-            "ParameterType": "switch"
-        },
-        {
-            "Name": "NoCopy",
-            "OriginalName": "/NOCOPY",
-            "Description": "COPY NO file info (useful with /PURGE).",
-            "ParameterType": "switch"
-        },
-        {
-            "Name": "SecFix",
-            "OriginalName": "/secfix",
-            "Description": "FIX file SECurity on all files, even skipped files.",
-            "ParameterType": "switch"
-        },
-        {
-            "Name": "TimFix",
-            "OriginalName": "/timfix",
-            "Description": "FIX file TIMes on all files, even skipped files.",
-            "ParameterType": "switch"
-        },
-        {
-            "Name": "Purge",
-            "OriginalName": "/purge",
-            "Description": "delete dest files/dirs that no longer exist in source.",
-            "ParameterType": "switch"
-        },
-        {
-            "Name": "Mirror",
-            "OriginalName": "/mir",
-            "Description": "MIRror a directory tree (equivalent to /E plus /PURGE).",
-            "ParameterType": "switch"
-        },
-        {
-            "Name": "Mov",
-            "OriginalName": "/mov",
-            "Description": "MOVe files (delete from source after copying).",
-            "ParameterType": "switch"
-        },
-        {
-            "Name": "Move",
-            "OriginalName": "/move",
-            "Description": "MOVE files AND dirs (delete from source after copying).",
-            "ParameterType": "switch"
-        },
-        {
-            "Name": "AddAttribute",
-            "OriginalName": "/a+",
-            "Description": "Add the given Attributes to copied files. R = Read only, A = Archive, S = System, H = Hidden, C = Compressed, N = Not content indexed,E = Encrypted, T = Temporary",
-            "ParameterType": "string",
-            "AdditionalParameterAttributes": [
-                "[ValidateSet('R','A','S','H','C','N','E','T')]"
-            ]
-        },
-        {
-            "Name": "RemoveAttribute",
-            "OriginalName": "/a-:",
-            "Description": "Remove the given Attributes from copied files. R = Read only, A = Archive, S = System, H = Hidden, C = Compressed, N = Not content indexed,E = Encrypted, T = Temporary",
-            "ParameterType": "string",
-            "AdditionalParameterAttributes": [
-                "[ValidateSet('R','A','S','H','C','N','E','T')]"
-            ]
-        }
-    ]
-}
+    {
+      "Name": "Destination",
+      "Aliases": ["Target"],
+      "OriginalName": "",
+      "Mandatory": true,
+      "Position": 1,
+      "Description": "Destination Dir (drive:\\path or \\\\server\\share\\path).",
+      "ParameterType": "string"
+    },
+    {
+      "Name": "Files",
+      "OriginalName": "",
+      "DefaultValue": "*.*",
+      "Position": 2,
+      "NoGap": true,
+      "Description": "File(s) to copy  (names/wildcards: default is '*.*'').",
+      "ParameterType": "string"
+    },
+    {
+      "Name": "IncludeSubDirectories",
+      "Aliases": ["s"],
+      "ParameterSetName": ["IncludeSubDirectories"],
+      "OriginalName": "/s",
+      "Description": "copy Subdirectories, but not empty ones.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "IncludeEmptySubDirectories",
+      "Aliases": ["e", "Recurse"],
+      "ParameterSetName": ["IncludeEmptySubDirectories"],
+      "OriginalName": "/e",
+      "Description": "copy subdirectories, including Empty ones.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "Level",
+      "Aliases": ["lev", "Depth"],
+      "OriginalName": "/lev:",
+      "NoGap": true,
+      "Description": "only copy the top n LEVels of the source directory tree.",
+      "ParameterType": "int"
+    },
+    {
+      "Name": "RestartMode",
+      "Aliases": ["z"],
+      "OriginalName": "/z",
+      "Description": "copy files in restartable mode.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "BackupMode",
+      "Aliases": ["b"],
+      "OriginalName": "/b",
+      "Description": "copy files in Backup mode.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "RestartBackupMode",
+      "Aliases": ["zb"],
+      "OriginalName": "/zb",
+      "Description": "use restartable mode; if access denied use Backup mode.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "UnbufferedIOMode",
+      "Aliases": ["j"],
+      "OriginalName": "/j",
+      "Description": "copy using unbuffered I/O (recommended for large files).",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "EFSRAW",
+      "OriginalName": "/EFSRAW",
+      "Description": "copy all encrypted files in EFS RAW mode.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "CopyFlags",
+      "Aliases": ["COPY"],
+      "OriginalName": "/COPY:",
+      "Description": "What to COPY for files (default is /COPY:DAT). (copyflags : D=Data, A=Attributes, T=Timestamps, X=Skip alt data streams). (S=Security=NTFS ACLs, O=Owner info, U=aUditing info).",
+      "ParameterType": "string",
+      "DefaultValue": "DAT",
+      "NoGap": true,
+      "AdditionalParameterAttributes": [
+        "[ValidateSet('d','a','t','x','s','o','u')]"
+      ]
+    },
+    {
+      "Name": "DCopyFlags",
+      "Aliases": ["DCOPY"],
+      "OriginalName": "/DCOPY:",
+      "Description": "What to COPY for files (default is /COPY:DA). (copyflags : D=Data, A=Attributes, T=Timestamps).",
+      "ParameterType": "string",
+      "DefaultValue": "DA",
+      "NoGap": true,
+      "AdditionalParameterAttributes": ["[ValidateSet('d','a','t')]"]
+    },
+    {
+      "Name": "NODCOPY",
+      "OriginalName": "/NODCOPY:",
+      "Description": "COPY NO directory info (by default /DCOPY:DA is done).",
+      "ParameterType": "string",
+      "DefaultValue": "DA",
+      "NoGap": true
+    },
+    {
+      "Name": "NOOFFLOAD",
+      "OriginalName": "/NOOFFLOAD",
+      "Description": "copy files without using the Windows Copy Offload mechanism.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "COMPRESS",
+      "OriginalName": "/COMPRESS",
+      "Description": "Request network compression during file transfer, if applicable.",
+      "ParameterType": "switch"
+    },
 
+    {
+      "Name": "SEC",
+      "OriginalName": "/SEC",
+      "Description": "copy files with SECurity (equivalent to /COPY:DATS).",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "COPYALL",
+      "OriginalName": "/COPYALL",
+      "Description": "COPY ALL file info (equivalent to /COPY:DATSOU).",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "NoCopy",
+      "OriginalName": "/NOCOPY",
+      "Description": "COPY NO file info (useful with /PURGE).",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "SecFix",
+      "OriginalName": "/secfix",
+      "Description": "FIX file SECurity on all files, even skipped files.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "TimFix",
+      "OriginalName": "/timfix",
+      "Description": "FIX file TIMes on all files, even skipped files.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "Purge",
+      "OriginalName": "/purge",
+      "Description": "delete dest files/dirs that no longer exist in source.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "Mirror",
+      "OriginalName": "/mir",
+      "Aliases": ["Sync"],
+      "Description": "MIRror a directory tree (equivalent to /E plus /PURGE).",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "Mov",
+      "OriginalName": "/mov",
+      "Description": "MOVe files (delete from source after copying).",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "Move",
+      "OriginalName": "/move",
+      "Description": "MOVE files AND dirs (delete from source after copying).",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "AddAttribute",
+      "OriginalName": "/a+",
+      "Description": "Add the given Attributes to copied files. R = Read only, A = Archive, S = System, H = Hidden, C = Compressed, N = Not content indexed,E = Encrypted, T = Temporary",
+      "ParameterType": "string",
+      "AdditionalParameterAttributes": [
+        "[ValidateSet('R','A','S','H','C','N','E','T')]"
+      ]
+    },
+    {
+      "Name": "RemoveAttribute",
+      "OriginalName": "/a-:",
+      "Description": "Remove the given Attributes from copied files. R = Read only, A = Archive, S = System, H = Hidden, C = Compressed, N = Not content indexed,E = Encrypted, T = Temporary",
+      "ParameterType": "string",
+      "AdditionalParameterAttributes": [
+        "[ValidateSet('R','A','S','H','C','N','E','T')]"
+      ]
+    },
+    {
+      "Name": "Create",
+      "OriginalName": "/Create",
+      "Description": "CREATE directory tree and zero-length files only.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "FAT",
+      "OriginalName": "/FAT",
+      "Description": "create destination files using 8.3 FAT file names only.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "IgnoreLongPath",
+      "Aliases": ["256"],
+      "OriginalName": "/256",
+      "Description": "Turn off very long path (> 256 characters) support.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "MonitorChange",
+      "Aliases": ["MON"],
+      "OriginalName": "/MON:",
+      "Description": "Monitors the source, and runs again when more than n changes are detected.",
+      "ParameterType": "int",
+      "NoGap": true
+    },
+    {
+      "Name": "MonitorTime",
+      "Aliases": ["MOT"],
+      "OriginalName": "/mot:",
+      "Description": "Monitors the source, and runs again in m minutes, if changes are detected.",
+      "ParameterType": "int",
+      "NoGap": true
+    },
+    {
+      "Name": "MultiThread",
+      "Aliases": ["MT"],
+      "OriginalName": "/MT:",
+      "Description": "MOVE files AND dirs (delete from source after copying).",
+      "ParameterType": "int",
+      "NoGap": true
+    },
+    {
+      "Name": "RunHours",
+      "Aliases": ["rh"],
+      "OriginalName": "/rh:",
+      "Description": "Specifies run times when new copies may be started.",
+      "ParameterType": "string",
+      "AdditionalParameterAttributes": [
+        "[ValidatePattern('[0-2]{1}[0-3]{1}[0-5]{1}[0-9]{1}-[0-2]{1}[0-3]{1}[0-5]{1}[0-9]{1}')]"
+      ],
+      "NoGap": true
+    },
+    {
+      "Name": "UsePerFileRunTimes",
+      "Aliases": ["pf"],
+      "OriginalName": "/pf:",
+      "Description": "Checks run times on a per-file (not per-pass) basis.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "InterPacketGap",
+      "Aliases": ["ipg"],
+      "OriginalName": "/ipg:",
+      "Description": "Specifies the inter-packet gap to free bandwidth on slow lines.",
+      "ParameterType": "int",
+      "NoGap": true
+    },
+    {
+      "Name": "SymbolicLink",
+      "Aliases": ["sl"],
+      "OriginalName": "/sl",
+      "Description": "Follows the symbolic link and copies the target.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "Archive",
+      "Aliases": ["a"],
+      "OriginalName": "/a",
+      "Description": "Copies only files for which the Archive attribute is set.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "ResetArchiveAttribute",
+      "Aliases": ["m"],
+      "OriginalName": "/m",
+      "Description": "Copies only files for which the Archive attribute is set, and resets the Archive attribute.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "IncludeAttribute",
+      "Aliases": ["ia"],
+      "OriginalName": "/ia:",
+      "Description": "Includes only files for which any of the specified attributes are set.",
+      "ParameterType": "string",
+      "AdditionalParameterAttributes": [
+        "[ValidateSet('R', 'A', 'S','C' ,'H', 'N', 'E', 'T', 'O')]"
+      ],
+      "NoGap": true
+    },
+    {
+      "Name": "ExcludeAttribute",
+      "Aliases": ["xa"],
+      "OriginalName": "/xa:",
+      "Description": "Excludes files for which any of the specified attributes are set.",
+      "ParameterType": "string",
+      "AdditionalParameterAttributes": [
+        "[ValidateSet('R', 'A', 'S','C' ,'H', 'N', 'E', 'T', 'O')]"
+      ],
+      "NoGap": true
+    },
+    {
+      "Name": "ExcludeFileName",
+      "Aliases": ["xf"],
+      "OriginalName": "/xf",
+      "Description": "Excludes files that match the specified names or paths. Note that FileName can include wildcard characters (* and ?).",
+      "ParameterType": "string"
+    },
+    {
+      "Name": "ExcludeDirectory",
+      "Aliases": ["xd"],
+      "OriginalName": "/xd",
+      "Description": "Excludes directories that match the specified names and paths.",
+      "ParameterType": "string"
+    },
+    {
+      "Name": "ExcludeChangedFiles",
+      "Aliases": ["xct"],
+      "OriginalName": "/xct",
+      "Description": "Excludes changed files.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "ExcludeNewerFiles",
+      "Aliases": ["xn"],
+      "OriginalName": "/xn",
+      "Description": "Excludes newer files.",
+      "ParameterType": "switch"
+    },
+
+    {
+      "Name": "ExcludeLonelyFiles",
+      "Aliases": ["xl"],
+      "OriginalName": "/xl",
+      "Description": "Excludes lonely files and directories.",
+      "ParameterType": "switch"
+    },
+
+    {
+      "Name": "IncludeSameFiles",
+      "Aliases": ["is"],
+      "OriginalName": "/is",
+      "Description": " Includes the same files.",
+      "ParameterType": "switch"
+    },
+
+    {
+      "Name": "IncludeTweakedFiles",
+      "Aliases": ["it"],
+      "OriginalName": "/it:",
+      "Description": "Includes 'tweaked' files.",
+      "ParameterType": "switch"
+    },
+
+    {
+      "Name": "MaximumFileSize",
+      "Aliases": ["max"],
+      "OriginalName": "/max:",
+      "Description": "Specifies the maximum file size (to exclude files bigger than N bytes).",
+      "ParameterType": "int",
+      "NoGap": true
+    },
+
+    {
+      "Name": "MaximumFileAge",
+      "Aliases": ["maxage"],
+      "OriginalName": "/maxage:",
+      "Description": "Specifies the maximum file age (to exclude files older than N days or date).",
+      "ParameterType": "string",
+      "NoGap": true
+    },
+
+    {
+      "Name": "MinimumFileAge",
+      "Aliases": ["minage"],
+      "OriginalName": "/minage:",
+      "Description": "Specifies the minimum file age (exclude files newer than N days or date).",
+      "ParameterType": "string",
+      "NoGap": true
+    },
+
+    {
+      "Name": "MaximumFileLastAccessDate",
+      "Aliases": ["maxlad"],
+      "OriginalName": "/maxlad:",
+      "Description": "Specifies the maximum last access date (excludes files unused since N).",
+      "ParameterType": "string",
+      "NoGap": true
+    },
+
+    {
+      "Name": "MinimumFileLastAccessDate",
+      "Aliases": ["minlad"],
+      "OriginalName": "/minlad:",
+      "Description": "Specifies the minimum last access date (excludes files used since N) If N is less than 1900, N specifies the number of days. Otherwise, N specifies a date in the format YYYYMMDD.",
+      "ParameterType": "string",
+      "NoGap": true
+    },
+
+    {
+      "Name": "ExcludeJunctionPoints",
+      "Aliases": ["xj"],
+      "OriginalName": "/xj",
+      "Description": "Excludes junction points, which are normally included by default.",
+      "ParameterType": "switch"
+    },
+
+    {
+      "Name": "ExcludeFileJunctionPoints",
+      "Aliases": ["xjf"],
+      "OriginalName": "/xjf",
+      "Description": "Excludes junction points for files.",
+      "ParameterType": "switch"
+    },
+
+    {
+      "Name": "ExcludeDirectoryJunctionPoints",
+      "Aliases": ["xjd"],
+      "OriginalName": "/xjd",
+      "Description": "Excludes junction points for directories.",
+      "ParameterType": "switch"
+    },
+
+    {
+      "Name": "AssumeFATFileTime",
+      "Aliases": ["fft"],
+      "OriginalName": "/fft",
+      "Description": "Assumes FAT file times (two-second precision).",
+      "ParameterType": "switch"
+    },
+
+    {
+      "Name": "CompensateDST",
+      "Aliases": ["dst"],
+      "OriginalName": "/dst:",
+      "Description": "Compensates for one-hour DST time differences.",
+      "ParameterType": "switch"
+    },
+
+    {
+      "Name": "Retry",
+      "Aliases": ["r"],
+      "OriginalName": "/r:",
+      "Description": "Specifies the number of retries on failed copies. Default is 3.",
+      "DefaultValue": "3",
+      "ParameterType": "int",
+      "NoGap": true
+    },
+    {
+      "Name": "Wait ",
+      "Aliases": ["w"],
+      "OriginalName": "/w:",
+      "Description": "Specifies the wait time between retries, in seconds. The default value of N is 3.",
+      "DefaultValue": "3",
+      "ParameterType": "int",
+      "NoGap": true
+    },
+    {
+      "Name": "SaveRetrySettings ",
+      "Aliases": ["reg"],
+      "OriginalName": "/reg:",
+      "Description": "Saves the values specified in the /r and /w options as default settings in the registry.",
+      "DefaultValue": "3",
+      "ParameterType": "int",
+      "NoGap": true
+    },
+    {
+      "Name": "WaitForShareName ",
+      "Aliases": ["tbd"],
+      "OriginalName": "/tbd",
+      "Description": "Specifies that the system will wait for share names to be defined (retry error 67).",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "List ",
+      "Aliases": ["l"],
+      "OriginalName": "/l",
+      "Description": " Specifies that files are to be listed only (and not copied, deleted, or time stamped).",
+      "ParameterType": "switch"
+    },
+    {
+        "Name": "LowFreeSpaceMode",
+        "Aliases": ["LFSM"],
+        "ParameterSetName": ["LowFreeSpaceMode"],
+        "OriginalName": "/LFSM",
+        "Description": "Using /LFSM requests robocopy to operate in 'low free space mode'. In that mode, robocopy will pause whenever a file copy would cause the destination volume's free space to go below a 'floor' value. If /LFSM is specified with no explicit floor value, the floor is set to ten percent of the destination volume's size. Low free space mode is incompatible with /MT, /EFSRAW, /B, and /ZB.",
+        "ParameterType": "switch"
+      },
+      {
+        "Name": "LowFreeSpaceModeFloorSize",
+        "Aliases": ["LFSMFloorSize"],
+        "ParameterSetName": ["LowFreeSpaceModeFloorSize"],
+        "OriginalName": "/LFSM:",
+        "Description": "Using /LFSM requests robocopy to operate in 'low free space mode'. In that mode, robocopy will pause whenever a file copy would cause the destination volume's free space to go below a 'floor' value, specifying the floor size in n [K:kilo,M:mega,G:giga] bytes. Low free space mode is incompatible with /MT, /EFSRAW, /B, and /ZB.",
+        "ParameterType": "string",
+        "AdditionalParameterAttributes": [
+            "[ValidateSet('K','M','G')]"
+          ],
+        "nogap": true
+      }
+  ]
+}
