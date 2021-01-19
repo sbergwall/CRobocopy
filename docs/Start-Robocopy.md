@@ -8,7 +8,7 @@ schema: 2.0.0
 # Start-Robocopy
 
 ## SYNOPSIS
-Run Robocopy.exe with native PowerShell Support.
+Run Robocopy.exe with from PowerShell.
 
 ## SYNTAX
 

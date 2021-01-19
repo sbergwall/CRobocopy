@@ -301,7 +301,7 @@ PROCESS {
 
 <#
 .SYNOPSIS
-Run Robocopy.exe with native PowerShell Support.
+Run Robocopy.exe with from PowerShell.
 
 .DESCRIPTION
 Robocopy.exe with Powershell

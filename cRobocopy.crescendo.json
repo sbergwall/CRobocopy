@@ -5,7 +5,7 @@
   "OriginalName": "C:/windows/system32/robocopy.exe",
   "Description": "Robocopy.exe with Powershell",
   "Usage": {
-    "Synopsis": "Run Robocopy.exe with native PowerShell Support."
+    "Synopsis": "Run Robocopy.exe with from PowerShell."
   },
   "HelpLinks": [
     "https://technet.microsoft.com/en-us/library/cc733145(v=ws.11).aspx"
@@ -511,24 +511,22 @@
       "ParameterType": "switch"
     },
     {
-        "Name": "LowFreeSpaceMode",
-        "Aliases": ["LFSM"],
-        "ParameterSetName": ["LowFreeSpaceMode"],
-        "OriginalName": "/LFSM",
-        "Description": "Using /LFSM requests robocopy to operate in 'low free space mode'. In that mode, robocopy will pause whenever a file copy would cause the destination volume's free space to go below a 'floor' value. If /LFSM is specified with no explicit floor value, the floor is set to ten percent of the destination volume's size. Low free space mode is incompatible with /MT, /EFSRAW, /B, and /ZB.",
-        "ParameterType": "switch"
-      },
-      {
-        "Name": "LowFreeSpaceModeFloorSize",
-        "Aliases": ["LFSMFloorSize"],
-        "ParameterSetName": ["LowFreeSpaceModeFloorSize"],
-        "OriginalName": "/LFSM:",
-        "Description": "Using /LFSM requests robocopy to operate in 'low free space mode'. In that mode, robocopy will pause whenever a file copy would cause the destination volume's free space to go below a 'floor' value, specifying the floor size in n [K:kilo,M:mega,G:giga] bytes. Low free space mode is incompatible with /MT, /EFSRAW, /B, and /ZB.",
-        "ParameterType": "string",
-        "AdditionalParameterAttributes": [
-            "[ValidateSet('K','M','G')]"
-          ],
-        "nogap": true
-      }
+      "Name": "LowFreeSpaceMode",
+      "Aliases": ["LFSM"],
+      "ParameterSetName": ["LowFreeSpaceMode"],
+      "OriginalName": "/LFSM",
+      "Description": "Using /LFSM requests robocopy to operate in 'low free space mode'. In that mode, robocopy will pause whenever a file copy would cause the destination volume's free space to go below a 'floor' value. If /LFSM is specified with no explicit floor value, the floor is set to ten percent of the destination volume's size. Low free space mode is incompatible with /MT, /EFSRAW, /B, and /ZB.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "LowFreeSpaceModeFloorSize",
+      "Aliases": ["LFSMFloorSize"],
+      "ParameterSetName": ["LowFreeSpaceModeFloorSize"],
+      "OriginalName": "/LFSM:",
+      "Description": "Using /LFSM requests robocopy to operate in 'low free space mode'. In that mode, robocopy will pause whenever a file copy would cause the destination volume's free space to go below a 'floor' value, specifying the floor size in n [K:kilo,M:mega,G:giga] bytes. Low free space mode is incompatible with /MT, /EFSRAW, /B, and /ZB.",
+      "ParameterType": "string",
+      "AdditionalParameterAttributes": ["[ValidateSet('K','M','G')]"],
+      "nogap": true
+    }
   ]
 }

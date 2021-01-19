@@ -6,7 +6,7 @@
       <command:verb>Start</command:verb>
       <command:noun>Robocopy</command:noun>
       <maml:description>
-        <maml:para>Run Robocopy.exe with native PowerShell Support.</maml:para>
+        <maml:para>Run Robocopy.exe with from PowerShell.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
