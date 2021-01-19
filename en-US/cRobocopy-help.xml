@@ -42,11 +42,11 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>Files</maml:name>
           <maml:description>
-            <maml:para>File(s) to copy  (names/wildcards: default is "\ .\ ").</maml:para>
+            <maml:para>File(s) to copy  (names/wildcards: default is \ .\ ).</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
-            <maml:name>String</maml:name>
+            <maml:name>String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>*.*</dev:defaultValue>
@@ -753,11 +753,11 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>Files</maml:name>
           <maml:description>
-            <maml:para>File(s) to copy  (names/wildcards: default is "\ .\ ").</maml:para>
+            <maml:para>File(s) to copy  (names/wildcards: default is \ .\ ).</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
-            <maml:name>String</maml:name>
+            <maml:name>String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>*.*</dev:defaultValue>
@@ -1464,11 +1464,11 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>Files</maml:name>
           <maml:description>
-            <maml:para>File(s) to copy  (names/wildcards: default is "\ .\ ").</maml:para>
+            <maml:para>File(s) to copy  (names/wildcards: default is \ .\ ).</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
-            <maml:name>String</maml:name>
+            <maml:name>String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>*.*</dev:defaultValue>
@@ -2175,11 +2175,11 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>Files</maml:name>
           <maml:description>
-            <maml:para>File(s) to copy  (names/wildcards: default is "\ .\ ").</maml:para>
+            <maml:para>File(s) to copy  (names/wildcards: default is \ .\ ).</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
-            <maml:name>String</maml:name>
+            <maml:name>String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>*.*</dev:defaultValue>
@@ -2887,11 +2887,11 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>Files</maml:name>
         <maml:description>
-          <maml:para>File(s) to copy  (names/wildcards: default is "\ .\ ").</maml:para>
+          <maml:para>File(s) to copy  (names/wildcards: default is \ .\ ).</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
-          <maml:name>String</maml:name>
+          <maml:name>String[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>*.*</dev:defaultValue>

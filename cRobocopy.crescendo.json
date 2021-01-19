@@ -42,8 +42,8 @@
       "DefaultValue": "*.*",
       "Position": 2,
       "NoGap": false,
-      "Description": "File(s) to copy  (names/wildcards: default is \"\\*.\\*\").",
-      "ParameterType": "string"
+      "Description": "File(s) to copy  (names/wildcards: default is \\*.\\*).",
+      "ParameterType": "string[]"
     },
     {
       "Name": "IncludeSubDirectories",

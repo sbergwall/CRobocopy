@@ -14,7 +14,7 @@ Run Robocopy.exe with from PowerShell.
 
 ### IncludeSubDirectories
 ```
-Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String>] [-IncludeSubDirectories]
+Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String[]>] [-IncludeSubDirectories]
  [-Level <Int32>] [-RestartMode] [-BackupMode] [-RestartBackupMode] [-UnbufferedIOMode] [-EFSRAW]
  [-CopyFlags <String>] [-DCopyFlags <String>] [-NODCOPY <String>] [-NOOFFLOAD] [-COMPRESS] [-SEC] [-COPYALL]
  [-NoCopy] [-SecFix] [-TimFix] [-Purge] [-Mirror] [-Mov] [-Move] [-AddAttribute <String>]
@@ -31,7 +31,7 @@ Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String>] [-
 
 ### IncludeEmptySubDirectories
 ```
-Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String>] [-IncludeEmptySubDirectories]
+Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String[]>] [-IncludeEmptySubDirectories]
  [-Level <Int32>] [-RestartMode] [-BackupMode] [-RestartBackupMode] [-UnbufferedIOMode] [-EFSRAW]
  [-CopyFlags <String>] [-DCopyFlags <String>] [-NODCOPY <String>] [-NOOFFLOAD] [-COMPRESS] [-SEC] [-COPYALL]
  [-NoCopy] [-SecFix] [-TimFix] [-Purge] [-Mirror] [-Mov] [-Move] [-AddAttribute <String>]
@@ -48,7 +48,7 @@ Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String>] [-
 
 ### LowFreeSpaceMode
 ```
-Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String>] [-Level <Int32>] [-RestartMode]
+Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String[]>] [-Level <Int32>] [-RestartMode]
  [-BackupMode] [-RestartBackupMode] [-UnbufferedIOMode] [-EFSRAW] [-CopyFlags <String>] [-DCopyFlags <String>]
  [-NODCOPY <String>] [-NOOFFLOAD] [-COMPRESS] [-SEC] [-COPYALL] [-NoCopy] [-SecFix] [-TimFix] [-Purge]
  [-Mirror] [-Mov] [-Move] [-AddAttribute <String>] [-RemoveAttribute <String>] [-Create] [-FAT]
@@ -65,7 +65,7 @@ Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String>] [-
 
 ### LowFreeSpaceModeFloorSize
 ```
-Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String>] [-Level <Int32>] [-RestartMode]
+Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String[]>] [-Level <Int32>] [-RestartMode]
  [-BackupMode] [-RestartBackupMode] [-UnbufferedIOMode] [-EFSRAW] [-CopyFlags <String>] [-DCopyFlags <String>]
  [-NODCOPY <String>] [-NOOFFLOAD] [-COMPRESS] [-SEC] [-COPYALL] [-NoCopy] [-SecFix] [-TimFix] [-Purge]
  [-Mirror] [-Mov] [-Move] [-AddAttribute <String>] [-RemoveAttribute <String>] [-Create] [-FAT]
@@ -126,10 +126,10 @@ Accept wildcard characters: False
 ```
 
 ### -Files
-File(s) to copy  (names/wildcards: default is "\*.\*").
+File(s) to copy  (names/wildcards: default is \*.\*).
 
 ```yaml
-Type: String
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
