@@ -19,18 +19,19 @@ Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String[]>] 
  [-SecFix] [-TimFix] [-Purge] [-Mirror] [-Mov] [-Move] [-AddAttribute <String>] [-RemoveAttribute <String>]
  [-Create] [-FAT] [-IgnoreLongPath] [-MonitorChange <Int32>] [-MonitorTime <Int32>] [-RunHours <String>]
  [-UsePerFileRunTimes] [-InterPacketGap <Int32>] [-Junctions] [-SymbolicLink] [-MultiThread <Int32>] [-NoDCopy]
- [-NoOffload] [-COMPRESS] [-Archive] [-ResetArchiveAttribute] [-IncludeAttribute <String>]
+ [-NoOffload] [-Compress] [-ArchiveOnly] [-ArchiveOnlyWithReset] [-IncludeAttribute <String>]
  [-ExcludeAttribute <String>] [-ExcludeFileName <String>] [-ExcludeDirectory <String>] [-ExcludeChangedFiles]
- [-ExcludeNewerFiles] [-ExcludeLonelyFiles] [-IncludeSameFiles] [-IncludeTweakedFiles]
- [-MaximumFileSize <Int32>] [-MaximumFileAge <String>] [-MinimumFileAge <String>]
- [-MaximumFileLastAccessDate <String>] [-MinimumFileLastAccessDate <String>] [-ExcludeJunctionPoints]
- [-ExcludeFileJunctionPoints] [-ExcludeDirectoryJunctionPoints] [-AssumeFATFileTime] [-CompensateDST]
- [-Retry <Int32>] [-Wait <Int32>] [-SaveRetrySettings <Int32>] [-WaitForShareName] [-List] [-LowFreeSpaceMode]
+ [-ExcludeNewerFiles] [-eXcludeOlderFiles] [-ExcludeExtraFilesDirectories] [-ExcludeLonelyFiles]
+ [-IncludeSameFiles] [-IncludeTweakedFiles] [-MaximumFileSize <Int32>] [-MinimumFileSize <Int32>]
+ [-MaximumFileAge <String>] [-MinimumFileAge <String>] [-MaximumFileLastAccessDate <String>]
+ [-MinimumFileLastAccessDate <String>] [-AssumeFATFileTime] [-CompensateDST] [-ExcludeJunctionPoints]
+ [-ExcludeDirectoryJunctionPoints] [-ExcludeFileJunctionPoints] [-Retry <Int32>] [-Wait <Int32>]
+ [-SaveRetrySettings <Int32>] [-WaitForShareName] [-List] [-LowFreeSpaceMode]
  [-LowFreeSpaceModeFloorSize <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Robocopy.exe with Powershell.
+Robocopy.exe with Powershell
 
 ## EXAMPLES
 
@@ -607,7 +608,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -COMPRESS
+### -Compress
 Request network compression during file transfer, if applicable.
 
 ```yaml
@@ -622,7 +623,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Archive
+### -ArchiveOnly
 Copies only files for which the Archive attribute is set.
 
 ```yaml
@@ -637,7 +638,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ResetArchiveAttribute
+### -ArchiveOnlyWithReset
 Copies only files for which the Archive attribute is set, and resets the Archive attribute.
 
 ```yaml
@@ -719,7 +720,7 @@ Excludes changed files.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: xct
+Aliases: xc
 
 Required: False
 Position: Named
@@ -735,6 +736,36 @@ Excludes newer files.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: xn
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -eXcludeOlderFiles
+Exclude Older files.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: xo
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ExcludeExtraFilesDirectories
+Exclude extra files and directories
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: XX
 
 Required: False
 Position: Named
@@ -795,6 +826,21 @@ Specifies the maximum file size (to exclude files bigger than N bytes).
 Type: Int32
 Parameter Sets: (All)
 Aliases: max
+
+Required: False
+Position: Named
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MinimumFileSize
+Specifies the minimum file size (to exclude files smaller than N bytes).
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: min
 
 Required: False
 Position: Named
@@ -864,13 +910,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ExcludeJunctionPoints
-Excludes junction points, which are normally included by default.
+### -AssumeFATFileTime
+Assumes FAT file times (two-second precision).
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: xj
+Aliases: fft
 
 Required: False
 Position: Named
@@ -879,13 +925,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ExcludeFileJunctionPoints
-Excludes junction points for files.
+### -CompensateDST
+Compensates for one-hour DST time differences.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: xjf
+Aliases: dst
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ExcludeJunctionPoints
+Exclude symbolic links (for both files and directories) and Junction points.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: xj
 
 Required: False
 Position: Named
@@ -909,28 +970,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -AssumeFATFileTime
-Assumes FAT file times (two-second precision).
+### -ExcludeFileJunctionPoints
+Excludes junction points for files.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: fft
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CompensateDST
-Compensates for one-hour DST time differences.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: dst
+Aliases: xjf
 
 Required: False
 Position: Named

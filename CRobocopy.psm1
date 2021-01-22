@@ -106,18 +106,18 @@ param(
 [Parameter()]
 [switch]$NoOffload,
 [Parameter()]
-[switch]$COMPRESS,
+[switch]$Compress,
 [Alias('a')]
 [Parameter()]
-[switch]$Archive,
+[switch]$ArchiveOnly,
 [Alias('m')]
 [Parameter()]
-[switch]$ResetArchiveAttribute,
-[ValidateSet('R', 'A', 'S','C' ,'H', 'N', 'E', 'T', 'O')]
+[switch]$ArchiveOnlyWithReset,
+[ValidatePattern('[RASCHNETO]')]
 [Alias('ia')]
 [Parameter()]
 [string]$IncludeAttribute,
-[ValidateSet('R', 'A', 'S','C' ,'H', 'N', 'E', 'T', 'O')]
+[ValidatePattern('[RASCHNETO]')]
 [Alias('xa')]
 [Parameter()]
 [string]$ExcludeAttribute,
@@ -127,12 +127,18 @@ param(
 [Alias('xd')]
 [Parameter()]
 [string]$ExcludeDirectory,
-[Alias('xct')]
+[Alias('xc')]
 [Parameter()]
 [switch]$ExcludeChangedFiles,
 [Alias('xn')]
 [Parameter()]
 [switch]$ExcludeNewerFiles,
+[Alias('xo')]
+[Parameter()]
+[switch]$eXcludeOlderFiles,
+[Alias('XX')]
+[Parameter()]
+[switch]$ExcludeExtraFilesDirectories,
 [Alias('xl')]
 [Parameter()]
 [switch]$ExcludeLonelyFiles,
@@ -145,33 +151,38 @@ param(
 [Alias('max')]
 [Parameter()]
 [int]$MaximumFileSize,
+[Alias('min')]
+[Parameter()]
+[int]$MinimumFileSize,
 [Alias('maxage')]
 [Parameter()]
 [string]$MaximumFileAge,
 [Alias('minage')]
 [Parameter()]
 [string]$MinimumFileAge,
+[ValidatePattern('(?<!\d)(?:(?:(?:1[6-9]|[2-9]\d)?\d{2})(?:(?:(?:0[13578]|1[02])31)|(?:(?:0[1,3-9]|1[0-2])(?:29|30)))|(?:(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))0229)|(?:(?:1[6-9]|[2-9]\d)?\d{2})(?:(?:0?[1-9])|(?:1[0-2]))(?:0?[1-9]|1\d|2[0-8]))(?!\d)')]
 [Alias('maxlad')]
 [Parameter()]
 [string]$MaximumFileLastAccessDate,
+[ValidatePattern('(?<!\d)(?:(?:(?:1[6-9]|[2-9]\d)?\d{2})(?:(?:(?:0[13578]|1[02])31)|(?:(?:0[1,3-9]|1[0-2])(?:29|30)))|(?:(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))0229)|(?:(?:1[6-9]|[2-9]\d)?\d{2})(?:(?:0?[1-9])|(?:1[0-2]))(?:0?[1-9]|1\d|2[0-8]))(?!\d)')]
 [Alias('minlad')]
 [Parameter()]
 [string]$MinimumFileLastAccessDate,
-[Alias('xj')]
-[Parameter()]
-[switch]$ExcludeJunctionPoints,
-[Alias('xjf')]
-[Parameter()]
-[switch]$ExcludeFileJunctionPoints,
-[Alias('xjd')]
-[Parameter()]
-[switch]$ExcludeDirectoryJunctionPoints,
 [Alias('fft')]
 [Parameter()]
 [switch]$AssumeFATFileTime,
 [Alias('dst')]
 [Parameter()]
 [switch]$CompensateDST,
+[Alias('xj')]
+[Parameter()]
+[switch]$ExcludeJunctionPoints,
+[Alias('xjd')]
+[Parameter()]
+[switch]$ExcludeDirectoryJunctionPoints,
+[Alias('xjf')]
+[Parameter()]
+[switch]$ExcludeFileJunctionPoints,
 [Alias('r')]
 [Parameter()]
 [int]$Retry = "3",
@@ -235,28 +246,31 @@ BEGIN {
         MultiThread = @{ OriginalName = '/MT:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [int]; NoGap = $True }
         NoDCopy = @{ OriginalName = '/NODCOPY:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         NoOffload = @{ OriginalName = '/NOOFFLOAD'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
-        COMPRESS = @{ OriginalName = '/COMPRESS'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
-        Archive = @{ OriginalName = '/a'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
-        ResetArchiveAttribute = @{ OriginalName = '/m'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        Compress = @{ OriginalName = '/COMPRESS'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ArchiveOnly = @{ OriginalName = '/a'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ArchiveOnlyWithReset = @{ OriginalName = '/m'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         IncludeAttribute = @{ OriginalName = '/ia:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
         ExcludeAttribute = @{ OriginalName = '/xa:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
         ExcludeFileName = @{ OriginalName = '/xf'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $False }
         ExcludeDirectory = @{ OriginalName = '/xd'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $False }
-        ExcludeChangedFiles = @{ OriginalName = '/xct'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ExcludeChangedFiles = @{ OriginalName = '/xc'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         ExcludeNewerFiles = @{ OriginalName = '/xn'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        eXcludeOlderFiles = @{ OriginalName = '/xo'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ExcludeExtraFilesDirectories = @{ OriginalName = '/XX'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         ExcludeLonelyFiles = @{ OriginalName = '/xl'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         IncludeSameFiles = @{ OriginalName = '/is'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         IncludeTweakedFiles = @{ OriginalName = '/it:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         MaximumFileSize = @{ OriginalName = '/max:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [int]; NoGap = $True }
+        MinimumFileSize = @{ OriginalName = '/min:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [int]; NoGap = $True }
         MaximumFileAge = @{ OriginalName = '/maxage:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
         MinimumFileAge = @{ OriginalName = '/minage:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
         MaximumFileLastAccessDate = @{ OriginalName = '/maxlad:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
         MinimumFileLastAccessDate = @{ OriginalName = '/minlad:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
-        ExcludeJunctionPoints = @{ OriginalName = '/xj'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
-        ExcludeFileJunctionPoints = @{ OriginalName = '/xjf'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
-        ExcludeDirectoryJunctionPoints = @{ OriginalName = '/xjd'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         AssumeFATFileTime = @{ OriginalName = '/fft'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         CompensateDST = @{ OriginalName = '/dst:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ExcludeJunctionPoints = @{ OriginalName = '/xj'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ExcludeDirectoryJunctionPoints = @{ OriginalName = '/xjd'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ExcludeFileJunctionPoints = @{ OriginalName = '/xjf'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         Retry = @{ OriginalName = '/r:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [int]; NoGap = $True }
         Wait  = @{ OriginalName = '/w:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [int]; NoGap = $True }
         SaveRetrySettings  = @{ OriginalName = '/reg:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [int]; NoGap = $True }
@@ -459,15 +473,15 @@ COPY NO directory info (by default /DCOPY:DA is done).
 copy files without using the Windows Copy Offload mechanism.
 
 
-.PARAMETER COMPRESS
+.PARAMETER Compress
 Request network compression during file transfer, if applicable.
 
 
-.PARAMETER Archive
+.PARAMETER ArchiveOnly
 Copies only files for which the Archive attribute is set.
 
 
-.PARAMETER ResetArchiveAttribute
+.PARAMETER ArchiveOnlyWithReset
 Copies only files for which the Archive attribute is set, and resets the Archive attribute.
 
 
@@ -495,6 +509,14 @@ Excludes changed files.
 Excludes newer files.
 
 
+.PARAMETER eXcludeOlderFiles
+Exclude Older files.
+
+
+.PARAMETER ExcludeExtraFilesDirectories
+Exclude extra files and directories
+
+
 .PARAMETER ExcludeLonelyFiles
 Excludes lonely files and directories.
 
@@ -509,6 +531,10 @@ Includes 'tweaked' files.
 
 .PARAMETER MaximumFileSize
 Specifies the maximum file size (to exclude files bigger than N bytes).
+
+
+.PARAMETER MinimumFileSize
+Specifies the minimum file size (to exclude files smaller than N bytes).
 
 
 .PARAMETER MaximumFileAge
@@ -527,24 +553,24 @@ Specifies the maximum last access date (excludes files unused since N).
 Specifies the minimum last access date (excludes files used since N) If N is less than 1900, N specifies the number of days. Otherwise, N specifies a date in the format YYYYMMDD.
 
 
-.PARAMETER ExcludeJunctionPoints
-Excludes junction points, which are normally included by default.
-
-
-.PARAMETER ExcludeFileJunctionPoints
-Excludes junction points for files.
-
-
-.PARAMETER ExcludeDirectoryJunctionPoints
-Excludes junction points for directories.
-
-
 .PARAMETER AssumeFATFileTime
 Assumes FAT file times (two-second precision).
 
 
 .PARAMETER CompensateDST
 Compensates for one-hour DST time differences.
+
+
+.PARAMETER ExcludeJunctionPoints
+Exclude symbolic links (for both files and directories) and Junction points.
+
+
+.PARAMETER ExcludeDirectoryJunctionPoints
+Excludes junction points for directories.
+
+
+.PARAMETER ExcludeFileJunctionPoints
+Excludes junction points for files.
 
 
 .PARAMETER Retry

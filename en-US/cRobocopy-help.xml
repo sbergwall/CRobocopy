@@ -436,7 +436,7 @@
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>COMPRESS</maml:name>
+          <maml:name>Compress</maml:name>
           <maml:description>
             <maml:para>Request network compression during file transfer, if applicable.</maml:para>
           </maml:description>
@@ -447,7 +447,7 @@
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="a">
-          <maml:name>Archive</maml:name>
+          <maml:name>ArchiveOnly</maml:name>
           <maml:description>
             <maml:para>Copies only files for which the Archive attribute is set.</maml:para>
           </maml:description>
@@ -458,7 +458,7 @@
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="m">
-          <maml:name>ResetArchiveAttribute</maml:name>
+          <maml:name>ArchiveOnlyWithReset</maml:name>
           <maml:description>
             <maml:para>Copies only files for which the Archive attribute is set, and resets the Archive attribute.</maml:para>
           </maml:description>
@@ -516,7 +516,7 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="xct">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="xc">
           <maml:name>ExcludeChangedFiles</maml:name>
           <maml:description>
             <maml:para>Excludes changed files.</maml:para>
@@ -531,6 +531,28 @@
           <maml:name>ExcludeNewerFiles</maml:name>
           <maml:description>
             <maml:para>Excludes newer files.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="xo">
+          <maml:name>eXcludeOlderFiles</maml:name>
+          <maml:description>
+            <maml:para>Exclude Older files.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="XX">
+          <maml:name>ExcludeExtraFilesDirectories</maml:name>
+          <maml:description>
+            <maml:para>Exclude extra files and directories</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -575,6 +597,18 @@
           <maml:name>MaximumFileSize</maml:name>
           <maml:description>
             <maml:para>Specifies the maximum file size (to exclude files bigger than N bytes).</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="min">
+          <maml:name>MinimumFileSize</maml:name>
+          <maml:description>
+            <maml:para>Specifies the minimum file size (to exclude files smaller than N bytes).</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -631,10 +665,10 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="xj">
-          <maml:name>ExcludeJunctionPoints</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="fft">
+          <maml:name>AssumeFATFileTime</maml:name>
           <maml:description>
-            <maml:para>Excludes junction points, which are normally included by default.</maml:para>
+            <maml:para>Assumes FAT file times (two-second precision).</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -642,10 +676,21 @@
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="xjf">
-          <maml:name>ExcludeFileJunctionPoints</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="dst">
+          <maml:name>CompensateDST</maml:name>
           <maml:description>
-            <maml:para>Excludes junction points for files.</maml:para>
+            <maml:para>Compensates for one-hour DST time differences.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="xj">
+          <maml:name>ExcludeJunctionPoints</maml:name>
+          <maml:description>
+            <maml:para>Exclude symbolic links (for both files and directories) and Junction points.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -664,21 +709,10 @@
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="fft">
-          <maml:name>AssumeFATFileTime</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="xjf">
+          <maml:name>ExcludeFileJunctionPoints</maml:name>
           <maml:description>
-            <maml:para>Assumes FAT file times (two-second precision).</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="dst">
-          <maml:name>CompensateDST</maml:name>
-          <maml:description>
-            <maml:para>Compensates for one-hour DST time differences.</maml:para>
+            <maml:para>Excludes junction points for files.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1215,7 +1249,7 @@
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>COMPRESS</maml:name>
+        <maml:name>Compress</maml:name>
         <maml:description>
           <maml:para>Request network compression during file transfer, if applicable.</maml:para>
         </maml:description>
@@ -1227,7 +1261,7 @@
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="a">
-        <maml:name>Archive</maml:name>
+        <maml:name>ArchiveOnly</maml:name>
         <maml:description>
           <maml:para>Copies only files for which the Archive attribute is set.</maml:para>
         </maml:description>
@@ -1239,7 +1273,7 @@
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="m">
-        <maml:name>ResetArchiveAttribute</maml:name>
+        <maml:name>ArchiveOnlyWithReset</maml:name>
         <maml:description>
           <maml:para>Copies only files for which the Archive attribute is set, and resets the Archive attribute.</maml:para>
         </maml:description>
@@ -1298,7 +1332,7 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="xct">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="xc">
         <maml:name>ExcludeChangedFiles</maml:name>
         <maml:description>
           <maml:para>Excludes changed files.</maml:para>
@@ -1314,6 +1348,30 @@
         <maml:name>ExcludeNewerFiles</maml:name>
         <maml:description>
           <maml:para>Excludes newer files.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="xo">
+        <maml:name>eXcludeOlderFiles</maml:name>
+        <maml:description>
+          <maml:para>Exclude Older files.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="XX">
+        <maml:name>ExcludeExtraFilesDirectories</maml:name>
+        <maml:description>
+          <maml:para>Exclude extra files and directories</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1370,6 +1428,18 @@
         </dev:type>
         <dev:defaultValue>0</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="min">
+        <maml:name>MinimumFileSize</maml:name>
+        <maml:description>
+          <maml:para>Specifies the minimum file size (to exclude files smaller than N bytes).</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="maxage">
         <maml:name>MaximumFileAge</maml:name>
         <maml:description>
@@ -1418,10 +1488,10 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="xj">
-        <maml:name>ExcludeJunctionPoints</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="fft">
+        <maml:name>AssumeFATFileTime</maml:name>
         <maml:description>
-          <maml:para>Excludes junction points, which are normally included by default.</maml:para>
+          <maml:para>Assumes FAT file times (two-second precision).</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1430,10 +1500,22 @@
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="xjf">
-        <maml:name>ExcludeFileJunctionPoints</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="dst">
+        <maml:name>CompensateDST</maml:name>
         <maml:description>
-          <maml:para>Excludes junction points for files.</maml:para>
+          <maml:para>Compensates for one-hour DST time differences.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="xj">
+        <maml:name>ExcludeJunctionPoints</maml:name>
+        <maml:description>
+          <maml:para>Exclude symbolic links (for both files and directories) and Junction points.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1454,22 +1536,10 @@
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="fft">
-        <maml:name>AssumeFATFileTime</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="xjf">
+        <maml:name>ExcludeFileJunctionPoints</maml:name>
         <maml:description>
-          <maml:para>Assumes FAT file times (two-second precision).</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="dst">
-        <maml:name>CompensateDST</maml:name>
-        <maml:description>
-          <maml:para>Compensates for one-hour DST time differences.</maml:para>
+          <maml:para>Excludes junction points for files.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
