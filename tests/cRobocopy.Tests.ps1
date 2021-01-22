@@ -10,6 +10,17 @@ Describe 'Module Tests' {
     }
 }
 
+Describe 'Parameter Tests' {
+    Import-Module $env:BHPSModulePath\cRobocopy.psm1 -Force | out-null
+    # Filter away empty OriginalName
+    $Parameters = ((get-content $env:BHPSModulePath\cRobocopy.crescendo.json | ConvertFrom-Json).Parameters).where{$_.OriginalName}
+    foreach ($Parameter in $Parameters) {
+        it 'Aliases contains Originalname: $($Parameter.OriginalName)' {
+                $Parameter.OriginalName.Replace("/","") -in $Parameter.Aliases | Should -Be $true
+        }
+    }
+}
+
 Describe 'JSON Tests' {
     It 'Is a valid JSON file' {
         $result = Get-Content $env:BHPSModulePath\cRobocopy.crescendo.json -Raw | test-json

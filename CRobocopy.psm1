@@ -313,7 +313,7 @@ BEGIN {
         RobocopyVerbose  = @{ OriginalName = '/V'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         ReportSourceFileTimeStamp = @{ OriginalName = '/ts'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         ReportFullPath = @{ OriginalName = '/fp'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
-        ReportSizeAsBytes = @{ OriginalName = '/bytes'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ReportSizeAsBytes = @{ OriginalName = '/bytes123123'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         ReportNoSize = @{ OriginalName = '/ns'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         ReportNoClass = @{ OriginalName = '/nc'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         ReportNoFileName = @{ OriginalName = '/NFL'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
