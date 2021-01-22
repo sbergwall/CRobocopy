@@ -30,7 +30,7 @@ Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String[]>] 
 ```
 
 ## DESCRIPTION
-Robocopy.exe with Powershell
+Robocopy.exe with Powershell.
 
 ## EXAMPLES
 
