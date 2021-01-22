@@ -48,7 +48,6 @@
     {
       "Name": "IncludeSubDirectories",
       "Aliases": ["s"],
-      "ParameterSetName": ["IncludeSubDirectories"],
       "OriginalName": "/s",
       "Mandatory": false,
       "Description": "copy Subdirectories, but not empty ones.",
@@ -57,7 +56,6 @@
     {
       "Name": "IncludeEmptySubDirectories",
       "Aliases": ["e", "Recurse"],
-      "ParameterSetName": ["IncludeEmptySubDirectories"],
       "OriginalName": "/e",
       "Mandatory": false,
       "Description": "copy subdirectories, including Empty ones.",
@@ -113,9 +111,7 @@
       "ParameterType": "string",
       "DefaultValue": "DAT",
       "NoGap": true,
-      "AdditionalParameterAttributes": [
-        "[ValidateSet('d','a','t','x','s','o','u')]"
-      ]
+      "AdditionalParameterAttributes": ["[ValidatePattern('[datxsou]')]"]
     },
     {
       "Name": "DCopyFlags",
@@ -125,27 +121,7 @@
       "ParameterType": "string",
       "DefaultValue": "DA",
       "NoGap": true,
-      "AdditionalParameterAttributes": ["[ValidateSet('d','a','t')]"]
-    },
-    {
-      "Name": "NODCOPY",
-      "OriginalName": "/NODCOPY:",
-      "Description": "COPY NO directory info (by default /DCOPY:DA is done).",
-      "ParameterType": "string",
-      "DefaultValue": "DA",
-      "NoGap": true
-    },
-    {
-      "Name": "NOOFFLOAD",
-      "OriginalName": "/NOOFFLOAD",
-      "Description": "copy files without using the Windows Copy Offload mechanism.",
-      "ParameterType": "switch"
-    },
-    {
-      "Name": "COMPRESS",
-      "OriginalName": "/COMPRESS",
-      "Description": "Request network compression during file transfer, if applicable.",
-      "ParameterType": "switch"
+      "AdditionalParameterAttributes": ["[ValidatePattern('[dat]')]"]
     },
 
     {
@@ -205,21 +181,19 @@
     },
     {
       "Name": "AddAttribute",
-      "OriginalName": "/a+",
+      "OriginalName": "/a+:",
       "Description": "Add the given Attributes to copied files. R = Read only, A = Archive, S = System, H = Hidden, C = Compressed, N = Not content indexed,E = Encrypted, T = Temporary",
       "ParameterType": "string",
-      "AdditionalParameterAttributes": [
-        "[ValidateSet('R','A','S','H','C','N','E','T')]"
-      ]
+      "NoGap": true,
+      "AdditionalParameterAttributes": ["[ValidatePattern('[RASHCNET]')]"]
     },
     {
       "Name": "RemoveAttribute",
       "OriginalName": "/a-:",
       "Description": "Remove the given Attributes from copied files. R = Read only, A = Archive, S = System, H = Hidden, C = Compressed, N = Not content indexed,E = Encrypted, T = Temporary",
       "ParameterType": "string",
-      "AdditionalParameterAttributes": [
-        "[ValidateSet('R','A','S','H','C','N','E','T')]"
-      ]
+      "NoGap": true,
+      "AdditionalParameterAttributes": ["[ValidatePattern('[RASHCNET]')]"]
     },
     {
       "Name": "Create",
@@ -257,14 +231,6 @@
       "NoGap": true
     },
     {
-      "Name": "MultiThread",
-      "Aliases": ["MT"],
-      "OriginalName": "/MT:",
-      "Description": "MOVE files AND dirs (delete from source after copying).",
-      "ParameterType": "int",
-      "NoGap": true
-    },
-    {
       "Name": "RunHours",
       "Aliases": ["rh"],
       "OriginalName": "/rh:",
@@ -291,12 +257,48 @@
       "NoGap": true
     },
     {
+      "Name": "Junctions",
+      "Aliases": ["sj"],
+      "OriginalName": "/sj",
+      "Description": "copy Junctions as junctions instead of as the junction targets.",
+      "ParameterType": "switch"
+    },
+    {
       "Name": "SymbolicLink",
       "Aliases": ["sl"],
       "OriginalName": "/sl",
       "Description": "Follows the symbolic link and copies the target.",
       "ParameterType": "switch"
     },
+    {
+      "Name": "MultiThread",
+      "Aliases": ["MT"],
+      "OriginalName": "/MT:",
+      "Description": "Do multi-threaded copies with n threads (default 8). n must be at least 1 and not greater than 128. This option is incompatible with the /IPG and /EFSRAW options. Redirect output using /LOG option for better performance.",
+      "ParameterType": "int",
+      "NoGap": true,
+      "DefaultValue": 8,
+      "AdditionalParameterAttributes": ["[ValidateRange(1,128)]"]
+    },
+    {
+      "Name": "NoDCopy",
+      "OriginalName": "/NODCOPY:",
+      "Description": "COPY NO directory info (by default /DCOPY:DA is done).",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "NoOffload",
+      "OriginalName": "/NOOFFLOAD",
+      "Description": "copy files without using the Windows Copy Offload mechanism.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "COMPRESS",
+      "OriginalName": "/COMPRESS",
+      "Description": "Request network compression during file transfer, if applicable.",
+      "ParameterType": "switch"
+    },
+
     {
       "Name": "Archive",
       "Aliases": ["a"],
@@ -515,7 +517,6 @@
     {
       "Name": "LowFreeSpaceMode",
       "Aliases": ["LFSM"],
-      "ParameterSetName": ["LowFreeSpaceMode"],
       "OriginalName": "/LFSM",
       "Description": "Using /LFSM requests robocopy to operate in 'low free space mode'. In that mode, robocopy will pause whenever a file copy would cause the destination volume's free space to go below a 'floor' value. If /LFSM is specified with no explicit floor value, the floor is set to ten percent of the destination volume's size. Low free space mode is incompatible with /MT, /EFSRAW, /B, and /ZB.",
       "ParameterType": "switch"
@@ -523,7 +524,6 @@
     {
       "Name": "LowFreeSpaceModeFloorSize",
       "Aliases": ["LFSMFloorSize"],
-      "ParameterSetName": ["LowFreeSpaceModeFloorSize"],
       "OriginalName": "/LFSM:",
       "Description": "Using /LFSM requests robocopy to operate in 'low free space mode'. In that mode, robocopy will pause whenever a file copy would cause the destination volume's free space to go below a 'floor' value, specifying the floor size in n [K:kilo,M:mega,G:giga] bytes. Low free space mode is incompatible with /MT, /EFSRAW, /B, and /ZB.",
       "ParameterType": "string",

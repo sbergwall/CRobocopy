@@ -13,10 +13,10 @@ param(
 [Parameter(Position=2)]
 [string[]]$Files = "*.*",
 [Alias('s')]
-[Parameter(ParameterSetName='IncludeSubDirectories')]
+[Parameter()]
 [switch]$IncludeSubDirectories,
 [Alias('e','Recurse')]
-[Parameter(ParameterSetName='IncludeEmptySubDirectories')]
+[Parameter()]
 [switch]$IncludeEmptySubDirectories,
 [Alias('lev','Depth')]
 [Parameter()]
@@ -35,20 +35,14 @@ param(
 [switch]$UnbufferedIOMode,
 [Parameter()]
 [switch]$EFSRAW,
-[ValidateSet('d','a','t','x','s','o','u')]
+[ValidatePattern('[datxsou]')]
 [Alias('COPY')]
 [Parameter()]
 [string]$CopyFlags = "DAT",
-[ValidateSet('d','a','t')]
+[ValidatePattern('[dat]')]
 [Alias('DCOPY')]
 [Parameter()]
 [string]$DCopyFlags = "DA",
-[Parameter()]
-[string]$NODCOPY = "DA",
-[Parameter()]
-[switch]$NOOFFLOAD,
-[Parameter()]
-[switch]$COMPRESS,
 [Parameter()]
 [switch]$SEC,
 [Parameter()]
@@ -68,10 +62,10 @@ param(
 [switch]$Mov,
 [Parameter()]
 [switch]$Move,
-[ValidateSet('R','A','S','H','C','N','E','T')]
+[ValidatePattern('[RASHCNET]')]
 [Parameter()]
 [string]$AddAttribute,
-[ValidateSet('R','A','S','H','C','N','E','T')]
+[ValidatePattern('[RASHCNET]')]
 [Parameter()]
 [string]$RemoveAttribute,
 [Parameter()]
@@ -87,9 +81,6 @@ param(
 [Alias('MOT')]
 [Parameter()]
 [int]$MonitorTime,
-[Alias('MT')]
-[Parameter()]
-[int]$MultiThread,
 [ValidatePattern('[0-2]{1}[0-3]{1}[0-5]{1}[0-9]{1}-[0-2]{1}[0-3]{1}[0-5]{1}[0-9]{1}')]
 [Alias('rh')]
 [Parameter()]
@@ -100,9 +91,22 @@ param(
 [Alias('ipg')]
 [Parameter()]
 [int]$InterPacketGap,
+[Alias('sj')]
+[Parameter()]
+[switch]$Junctions,
 [Alias('sl')]
 [Parameter()]
 [switch]$SymbolicLink,
+[ValidateRange(1,128)]
+[Alias('MT')]
+[Parameter()]
+[int]$MultiThread = "8",
+[Parameter()]
+[switch]$NoDCopy,
+[Parameter()]
+[switch]$NoOffload,
+[Parameter()]
+[switch]$COMPRESS,
 [Alias('a')]
 [Parameter()]
 [switch]$Archive,
@@ -184,11 +188,11 @@ param(
 [Parameter()]
 [switch]$List ,
 [Alias('LFSM')]
-[Parameter(ParameterSetName='LowFreeSpaceMode')]
+[Parameter()]
 [switch]$LowFreeSpaceMode,
 [ValidatePattern('\d+G|\d+M|\d+K')]
 [Alias('LFSMFloorSize')]
-[Parameter(ParameterSetName='LowFreeSpaceModeFloorSize')]
+[Parameter()]
 [string]$LowFreeSpaceModeFloorSize
     )
 
@@ -207,9 +211,6 @@ BEGIN {
         EFSRAW = @{ OriginalName = '/EFSRAW'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         CopyFlags = @{ OriginalName = '/COPY:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
         DCopyFlags = @{ OriginalName = '/DCOPY:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
-        NODCOPY = @{ OriginalName = '/NODCOPY:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
-        NOOFFLOAD = @{ OriginalName = '/NOOFFLOAD'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
-        COMPRESS = @{ OriginalName = '/COMPRESS'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         SEC = @{ OriginalName = '/SEC'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         COPYALL = @{ OriginalName = '/COPYALL'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         NoCopy = @{ OriginalName = '/NOCOPY'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
@@ -219,18 +220,22 @@ BEGIN {
         Mirror = @{ OriginalName = '/mir'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         Mov = @{ OriginalName = '/mov'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         Move = @{ OriginalName = '/move'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
-        AddAttribute = @{ OriginalName = '/a+'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $False }
-        RemoveAttribute = @{ OriginalName = '/a-:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $False }
+        AddAttribute = @{ OriginalName = '/a+:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
+        RemoveAttribute = @{ OriginalName = '/a-:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
         Create = @{ OriginalName = '/Create'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         FAT = @{ OriginalName = '/FAT'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         IgnoreLongPath = @{ OriginalName = '/256'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         MonitorChange = @{ OriginalName = '/MON:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [int]; NoGap = $True }
         MonitorTime = @{ OriginalName = '/mot:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [int]; NoGap = $True }
-        MultiThread = @{ OriginalName = '/MT:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [int]; NoGap = $True }
         RunHours = @{ OriginalName = '/rh:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
         UsePerFileRunTimes = @{ OriginalName = '/pf:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         InterPacketGap = @{ OriginalName = '/ipg:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [int]; NoGap = $True }
+        Junctions = @{ OriginalName = '/sj'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         SymbolicLink = @{ OriginalName = '/sl'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        MultiThread = @{ OriginalName = '/MT:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [int]; NoGap = $True }
+        NoDCopy = @{ OriginalName = '/NODCOPY:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        NoOffload = @{ OriginalName = '/NOOFFLOAD'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        COMPRESS = @{ OriginalName = '/COMPRESS'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         Archive = @{ OriginalName = '/a'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         ResetArchiveAttribute = @{ OriginalName = '/m'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         IncludeAttribute = @{ OriginalName = '/ia:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
@@ -358,18 +363,6 @@ What to COPY for files (default is /COPY:DAT). (copyflags : D=Data, A=Attributes
 What to COPY for files (default is /COPY:DA). (copyflags : D=Data, A=Attributes, T=Timestamps).
 
 
-.PARAMETER NODCOPY
-COPY NO directory info (by default /DCOPY:DA is done).
-
-
-.PARAMETER NOOFFLOAD
-copy files without using the Windows Copy Offload mechanism.
-
-
-.PARAMETER COMPRESS
-Request network compression during file transfer, if applicable.
-
-
 .PARAMETER SEC
 copy files with SECurity (equivalent to /COPY:DATS).
 
@@ -434,10 +427,6 @@ Monitors the source, and runs again when more than n changes are detected.
 Monitors the source, and runs again in m minutes, if changes are detected.
 
 
-.PARAMETER MultiThread
-MOVE files AND dirs (delete from source after copying).
-
-
 .PARAMETER RunHours
 Specifies run times when new copies may be started.
 
@@ -450,8 +439,28 @@ Checks run times on a per-file (not per-pass) basis.
 Specifies the inter-packet gap to free bandwidth on slow lines.
 
 
+.PARAMETER Junctions
+copy Junctions as junctions instead of as the junction targets.
+
+
 .PARAMETER SymbolicLink
 Follows the symbolic link and copies the target.
+
+
+.PARAMETER MultiThread
+Do multi-threaded copies with n threads (default 8). n must be at least 1 and not greater than 128. This option is incompatible with the /IPG and /EFSRAW options. Redirect output using /LOG option for better performance.
+
+
+.PARAMETER NoDCopy
+COPY NO directory info (by default /DCOPY:DA is done).
+
+
+.PARAMETER NoOffload
+copy files without using the Windows Copy Offload mechanism.
+
+
+.PARAMETER COMPRESS
+Request network compression during file transfer, if applicable.
 
 
 .PARAMETER Archive

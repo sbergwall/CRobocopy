@@ -12,71 +12,20 @@ Run Robocopy.exe with from PowerShell.
 
 ## SYNTAX
 
-### IncludeSubDirectories
 ```
 Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String[]>] [-IncludeSubDirectories]
- [-Level <Int32>] [-RestartMode] [-BackupMode] [-RestartBackupMode] [-UnbufferedIOMode] [-EFSRAW]
- [-CopyFlags <String>] [-DCopyFlags <String>] [-NODCOPY <String>] [-NOOFFLOAD] [-COMPRESS] [-SEC] [-COPYALL]
- [-NoCopy] [-SecFix] [-TimFix] [-Purge] [-Mirror] [-Mov] [-Move] [-AddAttribute <String>]
- [-RemoveAttribute <String>] [-Create] [-FAT] [-IgnoreLongPath] [-MonitorChange <Int32>] [-MonitorTime <Int32>]
- [-MultiThread <Int32>] [-RunHours <String>] [-UsePerFileRunTimes] [-InterPacketGap <Int32>] [-SymbolicLink]
- [-Archive] [-ResetArchiveAttribute] [-IncludeAttribute <String>] [-ExcludeAttribute <String>]
- [-ExcludeFileName <String>] [-ExcludeDirectory <String>] [-ExcludeChangedFiles] [-ExcludeNewerFiles]
- [-ExcludeLonelyFiles] [-IncludeSameFiles] [-IncludeTweakedFiles] [-MaximumFileSize <Int32>]
- [-MaximumFileAge <String>] [-MinimumFileAge <String>] [-MaximumFileLastAccessDate <String>]
- [-MinimumFileLastAccessDate <String>] [-ExcludeJunctionPoints] [-ExcludeFileJunctionPoints]
- [-ExcludeDirectoryJunctionPoints] [-AssumeFATFileTime] [-CompensateDST] [-Retry <Int32>] [-Wait <Int32>]
- [-SaveRetrySettings <Int32>] [-WaitForShareName] [-List] [<CommonParameters>]
-```
-
-### IncludeEmptySubDirectories
-```
-Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String[]>] [-IncludeEmptySubDirectories]
- [-Level <Int32>] [-RestartMode] [-BackupMode] [-RestartBackupMode] [-UnbufferedIOMode] [-EFSRAW]
- [-CopyFlags <String>] [-DCopyFlags <String>] [-NODCOPY <String>] [-NOOFFLOAD] [-COMPRESS] [-SEC] [-COPYALL]
- [-NoCopy] [-SecFix] [-TimFix] [-Purge] [-Mirror] [-Mov] [-Move] [-AddAttribute <String>]
- [-RemoveAttribute <String>] [-Create] [-FAT] [-IgnoreLongPath] [-MonitorChange <Int32>] [-MonitorTime <Int32>]
- [-MultiThread <Int32>] [-RunHours <String>] [-UsePerFileRunTimes] [-InterPacketGap <Int32>] [-SymbolicLink]
- [-Archive] [-ResetArchiveAttribute] [-IncludeAttribute <String>] [-ExcludeAttribute <String>]
- [-ExcludeFileName <String>] [-ExcludeDirectory <String>] [-ExcludeChangedFiles] [-ExcludeNewerFiles]
- [-ExcludeLonelyFiles] [-IncludeSameFiles] [-IncludeTweakedFiles] [-MaximumFileSize <Int32>]
- [-MaximumFileAge <String>] [-MinimumFileAge <String>] [-MaximumFileLastAccessDate <String>]
- [-MinimumFileLastAccessDate <String>] [-ExcludeJunctionPoints] [-ExcludeFileJunctionPoints]
- [-ExcludeDirectoryJunctionPoints] [-AssumeFATFileTime] [-CompensateDST] [-Retry <Int32>] [-Wait <Int32>]
- [-SaveRetrySettings <Int32>] [-WaitForShareName] [-List] [<CommonParameters>]
-```
-
-### LowFreeSpaceMode
-```
-Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String[]>] [-Level <Int32>] [-RestartMode]
- [-BackupMode] [-RestartBackupMode] [-UnbufferedIOMode] [-EFSRAW] [-CopyFlags <String>] [-DCopyFlags <String>]
- [-NODCOPY <String>] [-NOOFFLOAD] [-COMPRESS] [-SEC] [-COPYALL] [-NoCopy] [-SecFix] [-TimFix] [-Purge]
- [-Mirror] [-Mov] [-Move] [-AddAttribute <String>] [-RemoveAttribute <String>] [-Create] [-FAT]
- [-IgnoreLongPath] [-MonitorChange <Int32>] [-MonitorTime <Int32>] [-MultiThread <Int32>] [-RunHours <String>]
- [-UsePerFileRunTimes] [-InterPacketGap <Int32>] [-SymbolicLink] [-Archive] [-ResetArchiveAttribute]
- [-IncludeAttribute <String>] [-ExcludeAttribute <String>] [-ExcludeFileName <String>]
- [-ExcludeDirectory <String>] [-ExcludeChangedFiles] [-ExcludeNewerFiles] [-ExcludeLonelyFiles]
- [-IncludeSameFiles] [-IncludeTweakedFiles] [-MaximumFileSize <Int32>] [-MaximumFileAge <String>]
- [-MinimumFileAge <String>] [-MaximumFileLastAccessDate <String>] [-MinimumFileLastAccessDate <String>]
- [-ExcludeJunctionPoints] [-ExcludeFileJunctionPoints] [-ExcludeDirectoryJunctionPoints] [-AssumeFATFileTime]
- [-CompensateDST] [-Retry <Int32>] [-Wait <Int32>] [-SaveRetrySettings <Int32>] [-WaitForShareName] [-List]
- [-LowFreeSpaceMode] [<CommonParameters>]
-```
-
-### LowFreeSpaceModeFloorSize
-```
-Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String[]>] [-Level <Int32>] [-RestartMode]
- [-BackupMode] [-RestartBackupMode] [-UnbufferedIOMode] [-EFSRAW] [-CopyFlags <String>] [-DCopyFlags <String>]
- [-NODCOPY <String>] [-NOOFFLOAD] [-COMPRESS] [-SEC] [-COPYALL] [-NoCopy] [-SecFix] [-TimFix] [-Purge]
- [-Mirror] [-Mov] [-Move] [-AddAttribute <String>] [-RemoveAttribute <String>] [-Create] [-FAT]
- [-IgnoreLongPath] [-MonitorChange <Int32>] [-MonitorTime <Int32>] [-MultiThread <Int32>] [-RunHours <String>]
- [-UsePerFileRunTimes] [-InterPacketGap <Int32>] [-SymbolicLink] [-Archive] [-ResetArchiveAttribute]
- [-IncludeAttribute <String>] [-ExcludeAttribute <String>] [-ExcludeFileName <String>]
- [-ExcludeDirectory <String>] [-ExcludeChangedFiles] [-ExcludeNewerFiles] [-ExcludeLonelyFiles]
- [-IncludeSameFiles] [-IncludeTweakedFiles] [-MaximumFileSize <Int32>] [-MaximumFileAge <String>]
- [-MinimumFileAge <String>] [-MaximumFileLastAccessDate <String>] [-MinimumFileLastAccessDate <String>]
- [-ExcludeJunctionPoints] [-ExcludeFileJunctionPoints] [-ExcludeDirectoryJunctionPoints] [-AssumeFATFileTime]
- [-CompensateDST] [-Retry <Int32>] [-Wait <Int32>] [-SaveRetrySettings <Int32>] [-WaitForShareName] [-List]
+ [-IncludeEmptySubDirectories] [-Level <Int32>] [-RestartMode] [-BackupMode] [-RestartBackupMode]
+ [-UnbufferedIOMode] [-EFSRAW] [-CopyFlags <String>] [-DCopyFlags <String>] [-SEC] [-COPYALL] [-NoCopy]
+ [-SecFix] [-TimFix] [-Purge] [-Mirror] [-Mov] [-Move] [-AddAttribute <String>] [-RemoveAttribute <String>]
+ [-Create] [-FAT] [-IgnoreLongPath] [-MonitorChange <Int32>] [-MonitorTime <Int32>] [-RunHours <String>]
+ [-UsePerFileRunTimes] [-InterPacketGap <Int32>] [-Junctions] [-SymbolicLink] [-MultiThread <Int32>] [-NoDCopy]
+ [-NoOffload] [-COMPRESS] [-Archive] [-ResetArchiveAttribute] [-IncludeAttribute <String>]
+ [-ExcludeAttribute <String>] [-ExcludeFileName <String>] [-ExcludeDirectory <String>] [-ExcludeChangedFiles]
+ [-ExcludeNewerFiles] [-ExcludeLonelyFiles] [-IncludeSameFiles] [-IncludeTweakedFiles]
+ [-MaximumFileSize <Int32>] [-MaximumFileAge <String>] [-MinimumFileAge <String>]
+ [-MaximumFileLastAccessDate <String>] [-MinimumFileLastAccessDate <String>] [-ExcludeJunctionPoints]
+ [-ExcludeFileJunctionPoints] [-ExcludeDirectoryJunctionPoints] [-AssumeFATFileTime] [-CompensateDST]
+ [-Retry <Int32>] [-Wait <Int32>] [-SaveRetrySettings <Int32>] [-WaitForShareName] [-List] [-LowFreeSpaceMode]
  [-LowFreeSpaceModeFloorSize <String>] [<CommonParameters>]
 ```
 
@@ -145,7 +94,7 @@ copy Subdirectories, but not empty ones.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: IncludeSubDirectories
+Parameter Sets: (All)
 Aliases: s
 
 Required: False
@@ -160,7 +109,7 @@ copy subdirectories, including Empty ones.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: IncludeEmptySubDirectories
+Parameter Sets: (All)
 Aliases: e, Recurse
 
 Required: False
@@ -289,51 +238,6 @@ Aliases: DCOPY
 Required: False
 Position: Named
 Default value: DA
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -NODCOPY
-COPY NO directory info (by default /DCOPY:DA is done).
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: DA
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -NOOFFLOAD
-copy files without using the Windows Copy Offload mechanism.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -COMPRESS
-Request network compression during file transfer, if applicable.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -580,21 +484,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MultiThread
-MOVE files AND dirs (delete from source after copying).
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: MT
-
-Required: False
-Position: Named
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -RunHours
 Specifies run times when new copies may be started.
 
@@ -640,6 +529,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Junctions
+copy Junctions as junctions instead of as the junction targets.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: sj
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SymbolicLink
 Follows the symbolic link and copies the target.
 
@@ -647,6 +551,69 @@ Follows the symbolic link and copies the target.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: sl
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MultiThread
+Do multi-threaded copies with n threads (default 8).
+n must be at least 1 and not greater than 128.
+This option is incompatible with the /IPG and /EFSRAW options.
+Redirect output using /LOG option for better performance.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: MT
+
+Required: False
+Position: Named
+Default value: 8
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoDCopy
+COPY NO directory info (by default /DCOPY:DA is done).
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoOffload
+copy files without using the Windows Copy Offload mechanism.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -COMPRESS
+Request network compression during file transfer, if applicable.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
 
 Required: False
 Position: Named
@@ -1057,7 +1024,7 @@ Low free space mode is incompatible with /MT, /EFSRAW, /B, and /ZB.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: LowFreeSpaceMode
+Parameter Sets: (All)
 Aliases: LFSM
 
 Required: False
@@ -1074,7 +1041,7 @@ Low free space mode is incompatible with /MT, /EFSRAW, /B, and /ZB.
 
 ```yaml
 Type: String
-Parameter Sets: LowFreeSpaceModeFloorSize
+Parameter Sets: (All)
 Aliases: LFSMFloorSize
 
 Required: False
