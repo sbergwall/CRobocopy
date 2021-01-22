@@ -487,10 +487,13 @@
       "Description": "Excludes junction points for files.",
       "ParameterType": "switch"
     },
-
-
-
-
+    {
+      "Name": "IncludeModifiedFiles",
+      "Aliases": ["IM"],
+      "OriginalName": "/IM",
+      "Description": "Include Modified files (differing change times).",
+      "ParameterType": "switch"
+    },
     {
       "Name": "Retry",
       "Aliases": ["r"],
@@ -525,13 +528,7 @@
       "Description": "Specifies that the system will wait for share names to be defined (retry error 67).",
       "ParameterType": "switch"
     },
-    {
-      "Name": "List ",
-      "Aliases": ["l"],
-      "OriginalName": "/l",
-      "Description": " Specifies that files are to be listed only (and not copied, deleted, or time stamped).",
-      "ParameterType": "switch"
-    },
+
     {
       "Name": "LowFreeSpaceMode",
       "Aliases": ["LFSM"],
@@ -546,9 +543,14 @@
       "Description": "Using /LFSM requests robocopy to operate in 'low free space mode'. In that mode, robocopy will pause whenever a file copy would cause the destination volume's free space to go below a 'floor' value, specifying the floor size in n [K:kilo,M:mega,G:giga] bytes. Low free space mode is incompatible with /MT, /EFSRAW, /B, and /ZB.",
       "ParameterType": "string",
       "NoGap": true,
-      "AdditionalParameterAttributes": [
-        "[ValidatePattern('\\d+G|\\d+M|\\d+K')]"
-      ]
+      "AdditionalParameterAttributes": ["[ValidatePattern('\\d+G|\\d+M|\\d+K')]"]
+    },
+    {
+      "Name": "List ",
+      "Aliases": ["l"],
+      "OriginalName": "/l",
+      "Description": " Specifies that files are to be listed only (and not copied, deleted, or time stamped).",
+      "ParameterType": "switch"
     }
   ]
 }

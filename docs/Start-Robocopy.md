@@ -25,9 +25,9 @@ Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String[]>] 
  [-IncludeSameFiles] [-IncludeTweakedFiles] [-MaximumFileSize <Int32>] [-MinimumFileSize <Int32>]
  [-MaximumFileAge <String>] [-MinimumFileAge <String>] [-MaximumFileLastAccessDate <String>]
  [-MinimumFileLastAccessDate <String>] [-AssumeFATFileTime] [-CompensateDST] [-ExcludeJunctionPoints]
- [-ExcludeDirectoryJunctionPoints] [-ExcludeFileJunctionPoints] [-Retry <Int32>] [-Wait <Int32>]
- [-SaveRetrySettings <Int32>] [-WaitForShareName] [-List] [-LowFreeSpaceMode]
- [-LowFreeSpaceModeFloorSize <String>] [<CommonParameters>]
+ [-ExcludeDirectoryJunctionPoints] [-ExcludeFileJunctionPoints] [-IncludeModifiedFiles] [-Retry <Int32>]
+ [-Wait <Int32>] [-SaveRetrySettings <Int32>] [-WaitForShareName] [-LowFreeSpaceMode]
+ [-LowFreeSpaceModeFloorSize <String>] [-List] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -985,6 +985,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -IncludeModifiedFiles
+Include Modified files (differing change times).
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: IM
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Retry
 Specifies the number of retries on failed copies.
 Default is 3.
@@ -1047,21 +1062,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -List
-Specifies that files are to be listed only (and not copied, deleted, or time stamped).
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: l
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -LowFreeSpaceMode
 Using /LFSM requests robocopy to operate in 'low free space mode'.
 In that mode, robocopy will pause whenever a file copy would cause the destination volume's free space to go below a 'floor' value.
@@ -1093,6 +1093,21 @@ Aliases: LFSMFloorSize
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -List
+Specifies that files are to be listed only (and not copied, deleted, or time stamped).
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: l
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

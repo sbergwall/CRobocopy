@@ -183,6 +183,9 @@ param(
 [Alias('xjf')]
 [Parameter()]
 [switch]$ExcludeFileJunctionPoints,
+[Alias('IM')]
+[Parameter()]
+[switch]$IncludeModifiedFiles,
 [Alias('r')]
 [Parameter()]
 [int]$Retry = "3",
@@ -195,16 +198,16 @@ param(
 [Alias('tbd')]
 [Parameter()]
 [switch]$WaitForShareName ,
-[Alias('l')]
-[Parameter()]
-[switch]$List ,
 [Alias('LFSM')]
 [Parameter()]
 [switch]$LowFreeSpaceMode,
 [ValidatePattern('\d+G|\d+M|\d+K')]
 [Alias('LFSMFloorSize')]
 [Parameter()]
-[string]$LowFreeSpaceModeFloorSize
+[string]$LowFreeSpaceModeFloorSize,
+[Alias('l')]
+[Parameter()]
+[switch]$List 
     )
 
 BEGIN {
@@ -271,13 +274,14 @@ BEGIN {
         ExcludeJunctionPoints = @{ OriginalName = '/xj'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         ExcludeDirectoryJunctionPoints = @{ OriginalName = '/xjd'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         ExcludeFileJunctionPoints = @{ OriginalName = '/xjf'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        IncludeModifiedFiles = @{ OriginalName = '/IM'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         Retry = @{ OriginalName = '/r:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [int]; NoGap = $True }
         Wait  = @{ OriginalName = '/w:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [int]; NoGap = $True }
         SaveRetrySettings  = @{ OriginalName = '/reg:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [int]; NoGap = $True }
         WaitForShareName  = @{ OriginalName = '/tbd'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
-        List  = @{ OriginalName = '/l'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         LowFreeSpaceMode = @{ OriginalName = '/LFSM'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         LowFreeSpaceModeFloorSize = @{ OriginalName = '/LFSM:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
+        List  = @{ OriginalName = '/l'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
     }
 
     $__outputHandlers = @{ Default = @{ StreamOutput = $true; Handler = { $input } } }
@@ -573,6 +577,10 @@ Excludes junction points for directories.
 Excludes junction points for files.
 
 
+.PARAMETER IncludeModifiedFiles
+Include Modified files (differing change times).
+
+
 .PARAMETER Retry
 Specifies the number of retries on failed copies. Default is 3.
 
@@ -589,16 +597,16 @@ Saves the values specified in the /r and /w options as default settings in the r
 Specifies that the system will wait for share names to be defined (retry error 67).
 
 
-.PARAMETER List 
- Specifies that files are to be listed only (and not copied, deleted, or time stamped).
-
-
 .PARAMETER LowFreeSpaceMode
 Using /LFSM requests robocopy to operate in 'low free space mode'. In that mode, robocopy will pause whenever a file copy would cause the destination volume's free space to go below a 'floor' value. If /LFSM is specified with no explicit floor value, the floor is set to ten percent of the destination volume's size. Low free space mode is incompatible with /MT, /EFSRAW, /B, and /ZB.
 
 
 .PARAMETER LowFreeSpaceModeFloorSize
 Using /LFSM requests robocopy to operate in 'low free space mode'. In that mode, robocopy will pause whenever a file copy would cause the destination volume's free space to go below a 'floor' value, specifying the floor size in n [K:kilo,M:mega,G:giga] bytes. Low free space mode is incompatible with /MT, /EFSRAW, /B, and /ZB.
+
+
+.PARAMETER List 
+ Specifies that files are to be listed only (and not copied, deleted, or time stamped).
 
 
 
