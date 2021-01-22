@@ -207,7 +207,34 @@ param(
 [string]$LowFreeSpaceModeFloorSize,
 [Alias('l')]
 [Parameter()]
-[switch]$List 
+[switch]$List,
+[Alias('x')]
+[Parameter()]
+[switch]$ReportExtraFile ,
+[Alias('V')]
+[Parameter()]
+[switch]$RobocopyVerbose ,
+[Alias('ts')]
+[Parameter()]
+[switch]$ReportSourceFileTimeStamp,
+[Alias('FP')]
+[Parameter()]
+[switch]$ReportFullPath,
+[Alias('bytes')]
+[Parameter()]
+[switch]$ReportSizeAsBytes,
+[Alias('ns')]
+[Parameter()]
+[switch]$ReportNoSize,
+[Alias('nc')]
+[Parameter()]
+[switch]$ReportNoClass,
+[Alias('NFL')]
+[Parameter()]
+[switch]$ReportNoFileName,
+[Alias('ndl')]
+[Parameter()]
+[switch]$ReportNoDirectoryName
     )
 
 BEGIN {
@@ -281,7 +308,16 @@ BEGIN {
         WaitForShareName  = @{ OriginalName = '/tbd'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         LowFreeSpaceMode = @{ OriginalName = '/LFSM'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         LowFreeSpaceModeFloorSize = @{ OriginalName = '/LFSM:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
-        List  = @{ OriginalName = '/l'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        List = @{ OriginalName = '/l'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ReportExtraFile  = @{ OriginalName = '/x'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        RobocopyVerbose  = @{ OriginalName = '/V'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ReportSourceFileTimeStamp = @{ OriginalName = '/ts'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ReportFullPath = @{ OriginalName = '/fp'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ReportSizeAsBytes = @{ OriginalName = '/bytes'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ReportNoSize = @{ OriginalName = '/ns'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ReportNoClass = @{ OriginalName = '/nc'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ReportNoFileName = @{ OriginalName = '/NFL'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ReportNoDirectoryName = @{ OriginalName = '/ndl'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
     }
 
     $__outputHandlers = @{ Default = @{ StreamOutput = $true; Handler = { $input } } }
@@ -605,8 +641,44 @@ Using /LFSM requests robocopy to operate in 'low free space mode'. In that mode,
 Using /LFSM requests robocopy to operate in 'low free space mode'. In that mode, robocopy will pause whenever a file copy would cause the destination volume's free space to go below a 'floor' value, specifying the floor size in n [K:kilo,M:mega,G:giga] bytes. Low free space mode is incompatible with /MT, /EFSRAW, /B, and /ZB.
 
 
-.PARAMETER List 
- Specifies that files are to be listed only (and not copied, deleted, or time stamped).
+.PARAMETER List
+Specifies that files are to be listed only (and not copied, deleted, or time stamped).
+
+
+.PARAMETER ReportExtraFile 
+Report all eXtra files, not just those selected.
+
+
+.PARAMETER RobocopyVerbose 
+Produce Verbose output from Robocopy.exe, showing skipped files.
+
+
+.PARAMETER ReportSourceFileTimeStamp
+Include source file Time Stamps in the output.
+
+
+.PARAMETER ReportFullPath
+Include Full Pathname of files in the output.
+
+
+.PARAMETER ReportSizeAsBytes
+Print sizes as bytes.
+
+
+.PARAMETER ReportNoSize
+Don't log file sizes.
+
+
+.PARAMETER ReportNoClass
+Don't log file classes.
+
+
+.PARAMETER ReportNoFileName
+Don't log file names.
+
+
+.PARAMETER ReportNoDirectoryName
+Don't log directory names.
 
 
 

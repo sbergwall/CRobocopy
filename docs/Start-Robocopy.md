@@ -27,7 +27,9 @@ Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String[]>] 
  [-MinimumFileLastAccessDate <String>] [-AssumeFATFileTime] [-CompensateDST] [-ExcludeJunctionPoints]
  [-ExcludeDirectoryJunctionPoints] [-ExcludeFileJunctionPoints] [-IncludeModifiedFiles] [-Retry <Int32>]
  [-Wait <Int32>] [-SaveRetrySettings <Int32>] [-WaitForShareName] [-LowFreeSpaceMode]
- [-LowFreeSpaceModeFloorSize <String>] [-List] [<CommonParameters>]
+ [-LowFreeSpaceModeFloorSize <String>] [-List] [-ReportExtraFile] [-RobocopyVerbose]
+ [-ReportSourceFileTimeStamp] [-ReportFullPath] [-ReportSizeAsBytes] [-ReportNoSize] [-ReportNoClass]
+ [-ReportNoFileName] [-ReportNoDirectoryName] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -1104,6 +1106,141 @@ Specifies that files are to be listed only (and not copied, deleted, or time sta
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: l
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportExtraFile
+Report all eXtra files, not just those selected.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: x
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RobocopyVerbose
+Produce Verbose output from Robocopy.exe, showing skipped files.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: V
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportSourceFileTimeStamp
+Include source file Time Stamps in the output.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: ts
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportFullPath
+Include Full Pathname of files in the output.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: FP
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportSizeAsBytes
+Print sizes as bytes.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: bytes
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportNoSize
+Don't log file sizes.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: ns
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportNoClass
+Don't log file classes.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: nc
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportNoFileName
+Don't log file names.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: NFL
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportNoDirectoryName
+Don't log directory names.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: ndl
 
 Required: False
 Position: Named
