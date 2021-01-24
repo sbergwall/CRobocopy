@@ -230,7 +230,7 @@
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Sync">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Sync, mir">
           <maml:name>Mirror</maml:name>
           <maml:description>
             <maml:para>MIRror a directory tree (equivalent to /E plus /PURGE).</maml:para>
@@ -1142,7 +1142,7 @@
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Sync">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Sync, mir">
         <maml:name>Mirror</maml:name>
         <maml:description>
           <maml:para>MIRror a directory tree (equivalent to /E plus /PURGE).</maml:para>

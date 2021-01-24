@@ -341,7 +341,7 @@ MIRror a directory tree (equivalent to /E plus /PURGE).
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: Sync
+Aliases: Sync, mir
 
 Required: False
 Position: Named

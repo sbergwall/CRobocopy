@@ -163,7 +163,7 @@
     {
       "Name": "Mirror",
       "OriginalName": "/mir",
-      "Aliases": ["Sync"],
+      "Aliases": ["Sync","mir"],
       "Description": "MIRror a directory tree (equivalent to /E plus /PURGE).",
       "ParameterType": "switch"
     },

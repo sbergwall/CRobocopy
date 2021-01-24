@@ -10,16 +10,18 @@ Describe 'Module Tests' {
     }
 }
 
-Describe 'Parameter Tests' {
-    Import-Module $env:BHPSModulePath\cRobocopy.psm1 -Force | out-null
-    # Filter away empty OriginalName
-    $Parameters = ((get-content $env:BHPSModulePath\cRobocopy.crescendo.json | ConvertFrom-Json).Parameters).where{$_.OriginalName}
-    foreach ($Parameter in $Parameters) {
-        it 'Aliases contains Originalname: $($Parameter.OriginalName)' {
-                $Parameter.OriginalName.Replace("/","") -in $Parameter.Aliases | Should -Be $true
-        }
+Import-Module $env:BHPSModulePath\cRobocopy.psm1 -Force | out-null
+# Filter out parameters where an alias was not doable
+$Parameters = ((get-content $env:BHPSModulePath\cRobocopy.crescendo.json |
+    ConvertFrom-Json).Parameters).Where{$_.OriginalName -and $_.Name -ne "AddAttribute" -and $_.Name -ne "RemoveAttribute" -and $_.Name -ne "LowFreeSpaceModeFloorSize"}
+
+Describe "Parameter Validation" {
+    It "<_.Name> parameter either is OriginalName or has an alias based on OriginalName" -ForEach $Parameters {
+        $result = ($_.OriginalName.Replace("/","").Replace(":","") -in $_.Aliases) -or ($_.OriginalName.Replace("/","").Replace(":","") -in $_.Name)
+        $result | Should -Be $true
     }
 }
+
 
 Describe 'JSON Tests' {
     It 'Is a valid JSON file' {

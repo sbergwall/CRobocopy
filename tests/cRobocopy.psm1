@@ -63,6 +63,7 @@ param(
 [Parameter()]
 [switch]$Move,
 [ValidatePattern('[RASHCNET]')]
+[Alias('a+')]
 [Parameter()]
 [string]$AddAttribute,
 [ValidatePattern('[RASHCNET]')]
