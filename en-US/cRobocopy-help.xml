@@ -155,7 +155,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="DCOPY">
           <maml:name>DCopyFlags</maml:name>
           <maml:description>
-            <maml:para>What to COPY for files (default is /COPY:DA). (copyflags : D=Data, A=Attributes, T=Timestamps).</maml:para>
+            <maml:para>What to COPY for files (default is /COPY:DA). (copyflags : D=Data, A=Attributes, T=Timestamps). The /DCOPY:E flag requests that extended attribute copying should be attempted for directories. Note that currently robocopy will continue if a directory's EAs could not be copied. This flag is also not included in /COPYALL.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1244,7 +1244,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="DCOPY">
         <maml:name>DCopyFlags</maml:name>
         <maml:description>
-          <maml:para>What to COPY for files (default is /COPY:DA). (copyflags : D=Data, A=Attributes, T=Timestamps).</maml:para>
+          <maml:para>What to COPY for files (default is /COPY:DA). (copyflags : D=Data, A=Attributes, T=Timestamps). The /DCOPY:E flag requests that extended attribute copying should be attempted for directories. Note that currently robocopy will continue if a directory's EAs could not be copied. This flag is also not included in /COPYALL.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>

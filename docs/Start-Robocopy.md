@@ -236,6 +236,9 @@ Accept wildcard characters: False
 ### -DCopyFlags
 What to COPY for files (default is /COPY:DA).
 (copyflags : D=Data, A=Attributes, T=Timestamps).
+The /DCOPY:E flag requests that extended attribute copying should be attempted for directories.
+Note that currently robocopy will continue if a directory's EAs could not be copied.
+This flag is also not included in /COPYALL.
 
 ```yaml
 Type: String
