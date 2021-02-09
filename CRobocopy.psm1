@@ -232,9 +232,56 @@ param(
 [Alias('NFL')]
 [Parameter()]
 [switch]$ReportNoFileName,
-[Alias('ndl')]
+[Alias('NDL')]
 [Parameter()]
-[switch]$ReportNoDirectoryName
+[switch]$ReportNoDirectoryName,
+[Alias('NP')]
+[Parameter()]
+[switch]$NoProgress,
+[Alias('ETA')]
+[Parameter()]
+[switch]$EstimatedTimeOfArrival,
+[Alias('LOG')]
+[Parameter()]
+[string]$LogFilePath,
+[Alias('LogAppend')]
+[Parameter()]
+[string]$LogFilePathAppend,
+[Alias('UNILOG')]
+[Parameter()]
+[string]$LogFilePathUnicode,
+[Alias('UnilogAppend')]
+[Parameter()]
+[string]$LogFilePathUnicodeAppend,
+[Parameter()]
+[switch]$Tee,
+[Alias('NJH')]
+[Parameter()]
+[switch]$NoJobHeader,
+[Alias('NJS')]
+[Parameter()]
+[switch]$NoJobSummary,
+[Alias('UNICODE')]
+[Parameter()]
+[switch]$UnicodeStatus,
+[Alias('job')]
+[Parameter()]
+[string]$JobName,
+[Alias('save')]
+[Parameter()]
+[string]$SaveJobName,
+[Alias('quit')]
+[Parameter()]
+[switch]$QuitAfterProcessing,
+[Alias('NoSD')]
+[Parameter()]
+[switch]$NoSourceDirectory,
+[Alias('NoDD')]
+[Parameter()]
+[switch]$NoDestinationDirectory,
+[Alias('If')]
+[Parameter()]
+[string]$IncludeFile
     )
 
 BEGIN {
@@ -317,7 +364,23 @@ BEGIN {
         ReportNoSize = @{ OriginalName = '/ns'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         ReportNoClass = @{ OriginalName = '/nc'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
         ReportNoFileName = @{ OriginalName = '/NFL'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
-        ReportNoDirectoryName = @{ OriginalName = '/ndl'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        ReportNoDirectoryName = @{ OriginalName = '/NDL'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        NoProgress = @{ OriginalName = '/NP'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        EstimatedTimeOfArrival = @{ OriginalName = '/ETA'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        LogFilePath = @{ OriginalName = '/LOG:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
+        LogFilePathAppend = @{ OriginalName = '/LOG+:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
+        LogFilePathUnicode = @{ OriginalName = '/UNILOG:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
+        LogFilePathUnicodeAppend = @{ OriginalName = '/UNILOG+:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
+        Tee = @{ OriginalName = '/TEE'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        NoJobHeader = @{ OriginalName = '/NJH'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        NoJobSummary = @{ OriginalName = '/NJS'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        UnicodeStatus = @{ OriginalName = '/UNICODE'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        JobName = @{ OriginalName = '/job:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
+        SaveJobName = @{ OriginalName = '/save:'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $True }
+        QuitAfterProcessing = @{ OriginalName = '/quit'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        NoSourceDirectory = @{ OriginalName = '/NOSD'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        NoDestinationDirectory = @{ OriginalName = '/NODD'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [switch]; NoGap = $False }
+        IncludeFile = @{ OriginalName = '/IF'; OriginalPosition = '0'; Position = '2147483647'; ParameterType = [string]; NoGap = $False }
     }
 
     $__outputHandlers = @{ Default = @{ StreamOutput = $true; Handler = { $input } } }
@@ -678,7 +741,71 @@ Don't log file names.
 
 
 .PARAMETER ReportNoDirectoryName
-Don't log directory names.
+No Directory List - don't log directory names.
+
+
+.PARAMETER NoProgress
+No Progress - don't display percentage copied.
+
+
+.PARAMETER EstimatedTimeOfArrival
+show Estimated Time of Arrival of copied files.
+
+
+.PARAMETER LogFilePath
+output status to LOG file (overwrite existing log).
+
+
+.PARAMETER LogFilePathAppend
+output status to LOG file (append to existing log).
+
+
+.PARAMETER LogFilePathUnicode
+output status to LOG file as UNICODE (overwrite existing log).
+
+
+.PARAMETER LogFilePathUnicodeAppend
+output status to LOG file as UNICODE (append to existing log).
+
+
+.PARAMETER Tee
+output to console window, as well as the log file.
+
+
+.PARAMETER NoJobHeader
+No Job Header.
+
+
+.PARAMETER NoJobSummary
+No Job Summary.
+
+
+.PARAMETER UnicodeStatus
+output status as UNICODE.
+
+
+.PARAMETER JobName
+Take parameters from the named JOB file.
+
+
+.PARAMETER SaveJobName
+SAVE parameters to the named job file.
+
+
+.PARAMETER QuitAfterProcessing
+QUIT after processing command line (to view parameters).
+
+
+.PARAMETER NoSourceDirectory
+NO Source Directory is specified.
+
+
+.PARAMETER NoDestinationDirectory
+NO Destination Directory is specified.
+
+
+.PARAMETER IncludeFile
+Include the following Files.
 
 
 

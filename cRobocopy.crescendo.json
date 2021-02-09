@@ -616,10 +616,127 @@
     },
     {
       "Name": "ReportNoDirectoryName",
-      "Aliases": ["ndl"],
-      "OriginalName": "/ndl",
-      "Description": "Don't log directory names.",
+      "Aliases": ["NDL"],
+      "OriginalName": "/NDL",
+      "Description": "No Directory List - don't log directory names.",
       "ParameterType": "switch"
+    },
+    {
+      "Name": "NoProgress",
+      "Aliases": ["NP"],
+      "OriginalName": "/NP",
+      "Description": "No Progress - don't display percentage copied.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "EstimatedTimeOfArrival",
+      "Aliases": ["ETA"],
+      "OriginalName": "/ETA",
+      "Description": "show Estimated Time of Arrival of copied files.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "LogFilePath",
+      "Aliases": ["LOG"],
+      "OriginalName": "/LOG:",
+      "NoGap": true,
+      "Description": "output status to LOG file (overwrite existing log).",
+      "ParameterType": "string"
+    },
+    {
+      "Name": "LogFilePathAppend",
+      "Aliases": ["LogAppend"],
+      "OriginalName": "/LOG+:",
+      "NoGap": true,
+      "Description": "output status to LOG file (append to existing log).",
+      "ParameterType": "string"
+    },
+    {
+      "Name": "LogFilePathUnicode",
+      "Aliases": ["UNILOG"],
+      "OriginalName": "/UNILOG:",
+      "NoGap": true,
+      "Description": "output status to LOG file as UNICODE (overwrite existing log).",
+      "ParameterType": "string"
+    },
+    {
+      "Name": "LogFilePathUnicodeAppend",
+      "Aliases": ["UnilogAppend"],
+      "OriginalName": "/UNILOG+:",
+      "NoGap": true,
+      "Description": "output status to LOG file as UNICODE (append to existing log).",
+      "ParameterType": "string"
+    },
+    {
+      "Name": "Tee",
+      "OriginalName": "/TEE",
+      "Description": "output to console window, as well as the log file.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "NoJobHeader",
+      "Aliases": ["NJH"],
+      "OriginalName": "/NJH",
+      "Description": "No Job Header.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "NoJobSummary",
+      "Aliases": ["NJS"],
+      "OriginalName": "/NJS",
+      "Description": "No Job Summary.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "UnicodeStatus",
+      "Aliases": ["UNICODE"],
+      "OriginalName": "/UNICODE",
+      "Description": "output status as UNICODE.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "JobName",
+      "Aliases": ["job"],
+      "OriginalName": "/job:",
+      "NoGap": true,
+      "Description": "Take parameters from the named JOB file.",
+      "ParameterType": "string"
+    },
+    {
+      "Name": "SaveJobName",
+      "Aliases": ["save"],
+      "OriginalName": "/save:",
+      "NoGap": true,
+      "Description": "SAVE parameters to the named job file.",
+      "ParameterType": "string"
+    },
+    {
+      "Name": "QuitAfterProcessing",
+      "Aliases": ["quit"],
+      "OriginalName": "/quit",
+      "Description": "QUIT after processing command line (to view parameters).",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "NoSourceDirectory",
+      "Aliases": ["NoSD"],
+      "OriginalName": "/NOSD",
+      "Description": "NO Source Directory is specified.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "NoDestinationDirectory",
+      "Aliases": ["NoDD"],
+      "OriginalName": "/NODD",
+      "Description": "NO Destination Directory is specified.",
+      "ParameterType": "switch"
+    },
+    {
+      "Name": "IncludeFile",
+      "Aliases": ["If"],
+      "OriginalName": "/IF",
+      "Description": "Include the following Files.",
+      "ParameterType": "string"
     }
   ]
 }

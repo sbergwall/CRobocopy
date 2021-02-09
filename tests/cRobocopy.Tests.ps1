@@ -12,8 +12,9 @@ Describe 'Module Tests' {
 
 Import-Module $env:BHPSModulePath\cRobocopy.psm1 -Force | out-null
 # Filter out parameters where an alias was not doable
+$ExcludedAliases = "AddAttribute","RemoveAttribute","LowFreeSpaceModeFloorSize","LogFilePathUnicodeAppend","LogFilePathAppend"
 $Parameters = ((get-content $env:BHPSModulePath\cRobocopy.crescendo.json |
-    ConvertFrom-Json).Parameters).Where{$_.OriginalName -and $_.Name -ne "AddAttribute" -and $_.Name -ne "RemoveAttribute" -and $_.Name -ne "LowFreeSpaceModeFloorSize"}
+    ConvertFrom-Json).Parameters).Where{$_.OriginalName -and $_.Name -notin $ExcludedAliases}
 
 Describe "Parameter Validation" {
     It "<_.Name> parameter either is OriginalName or has an alias based on OriginalName" -ForEach $Parameters {

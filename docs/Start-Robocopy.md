@@ -29,7 +29,11 @@ Start-Robocopy [-Source] <String> [-Destination] <String> [[-Files] <String[]>] 
  [-Wait <Int32>] [-SaveRetrySettings <Int32>] [-WaitForShareName] [-LowFreeSpaceMode]
  [-LowFreeSpaceModeFloorSize <String>] [-List] [-ReportExtraFile] [-RobocopyVerbose]
  [-ReportSourceFileTimeStamp] [-ReportFullPath] [-ReportSizeAsBytes] [-ReportNoSize] [-ReportNoClass]
- [-ReportNoFileName] [-ReportNoDirectoryName] [<CommonParameters>]
+ [-ReportNoFileName] [-ReportNoDirectoryName] [-NoProgress] [-EstimatedTimeOfArrival] [-LogFilePath <String>]
+ [-LogFilePathAppend <String>] [-LogFilePathUnicode <String>] [-LogFilePathUnicodeAppend <String>] [-Tee]
+ [-NoJobHeader] [-NoJobSummary] [-UnicodeStatus] [-JobName <String>] [-SaveJobName <String>]
+ [-QuitAfterProcessing] [-NoSourceDirectory] [-NoDestinationDirectory] [-IncludeFile <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -1235,16 +1239,256 @@ Accept wildcard characters: False
 ```
 
 ### -ReportNoDirectoryName
-Don't log directory names.
+No Directory List - don't log directory names.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: ndl
+Aliases: NDL
 
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoProgress
+No Progress - don't display percentage copied.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: NP
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -EstimatedTimeOfArrival
+show Estimated Time of Arrival of copied files.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: ETA
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -LogFilePath
+output status to LOG file (overwrite existing log).
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: LOG
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -LogFilePathAppend
+output status to LOG file (append to existing log).
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: LogAppend
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -LogFilePathUnicode
+output status to LOG file as UNICODE (overwrite existing log).
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: UNILOG
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -LogFilePathUnicodeAppend
+output status to LOG file as UNICODE (append to existing log).
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: UnilogAppend
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Tee
+output to console window, as well as the log file.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoJobHeader
+No Job Header.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: NJH
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoJobSummary
+No Job Summary.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: NJS
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UnicodeStatus
+output status as UNICODE.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: UNICODE
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -JobName
+Take parameters from the named JOB file.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: job
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SaveJobName
+SAVE parameters to the named job file.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: save
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -QuitAfterProcessing
+QUIT after processing command line (to view parameters).
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: quit
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoSourceDirectory
+NO Source Directory is specified.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: NoSD
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoDestinationDirectory
+NO Destination Directory is specified.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: NoDD
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -IncludeFile
+Include the following Files.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: If
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

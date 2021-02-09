@@ -6,7 +6,8 @@ $Script:Modules = @(
     'InvokeBuild',
     'Pester',
     'platyPS',
-    'BuildHelpers'
+    'BuildHelpers',
+    'Microsoft.PowerShell.Crescendo'
 )
 
 $Script:ModuleInstallScope = 'CurrentUser'
